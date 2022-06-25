@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{prelude}
+
+\title{Filtres et théorème de Tychonov}
+\author{Shika}
+\date{Juin 2022}
+\begin{document}
+
+\maketitle
+
+
+\section{Filtres et ultrafiltres}
+\begin{definition}
+    Un filtre sur $X$ est une partie $\mathcal{F} \subset \mathcal{P}(X)$ qui vérifie:
+    \begin{enumerate}
+        \item $\varnothing \not\in \mathcal{F}, X \in \mathcal{F}$
+        \item $A, B \in \mathcal{F} \implies A \cap B \in \mathcal{F}$
+        \item $A \in \mathcal{F} \land A \subset B \implies B \in \mathcal{F}$
+    \end{enumerate}
+\end{definition}
+
+L'intuition derrière cette définition est qu'un filtre défini une notion de grosseur.\\
+Ainsi, la première condition stipule que l'ensemble vide n'est pas gros et que l'ensemble entier l'est, la seconde que l'intersection de deux grosses parties de $X$ est encore une grosse partie de $X$ et la dernière qu'un sur-ensemble d'une grosse partie est aussi gros.\\
+
+Un premier exemple de filtre sur un ensemble $X$ est le filtre trivial, donnée par $\mathcal{F} = \{X\}$.\\ Un exemple moins trivial est donné par le filtre principal associé à une partie non-vide $A \subset X$, donné par $\mathcal{F}_A = \{B \subset X \mid A \subset B\}$.\\
+On peut aussi considérer le filtre cofini sur un ensemble $X$ infini, donné par $\mathcal{F}_{\text{cofinite}} = \{A \subset X \mid X\setminus A \text{ est fini}\}$.\\
+Un dernier exemple, ou plutôt une construction, est l'intersection d'une famille quelconque $(\mathcal{F}_i)_{i \in I}$ de filtres, qui est encore un filtre (exercice).\\
+L'union de deux filtres n'est cependant pas toujours un filtre.
+Pour pouvoir considérer le filtre engendré par un ensemble de parties $\mathcal{B} \subset \mathcal{P}(X)$, il est clair qu'on a besoin d'avoir
+$$\forall B_1, \ldots, B_n \in \mathcal{B}, \bigcap_{i=1}^{n}{B_i} \neq \varnothing$$
+On dit que $\mathcal{B}$ a la propriété de l'intersection finie. Cette condition est aussi suffisante, puisque $\langle B \rangle = \{A \subset X \mid \exists B \in \mathcal{B}, B \subset A\}$ est alors un filtre, le plus petit contenant $\mathcal{B}$.
+
+\begin{definition}
+    Si $\mathcal{B} \subset \mathcal{P}(X)$ a la propriété de l'intersection finie, alors le filtre engendré par $B$ est donné par $$\langle B \rangle = \{A \subset X \mid \exists B \in \mathcal{B}, B \subset A\}$$
+\end{definition}
+
+\begin{definition}
+    Un filtre $\mathcal{F}_1$ est plus fin qu'un filtre $\mathcal{F}_2$ si $\mathcal{F}_2 \subset \mathcal{F}_1$
+\end{definition}
+
+On peut se demander ce à quoi ressemble un filtre "saturé", autrement dit maximal pour l'inclusion. On montre que c'est en fait équivalent à la définition suivante, qui, selon l'analogie vue plus haut, ajoute la condition qu'une partie est soit grosse, soit de complémentaire gros:
+
+\begin{definition}
+    Un ultrafiltre sur $X$ est un filtre $\mathcal{F}$ sur $X$ qui vérifie la condition supplémentaire que pour tout $A \subset X$, soit $A \subset \mathcal{F}$ soit $A^c \subset \mathcal{F}$
+\end{definition}
+
+\begin{proposition}
+    Un filtre est maximal pour l'inclusion si et seulement si c'est un ultrafiltre.
+\end{proposition}
+
+\begin{preuve}
+    Si $\mathcal{F}$ est maximal pour l'inclusion et qu'il existe $A$ tel que ni $A$ ni $A^c$ ne soit dans $\mathcal{F}$, on a alors pour tout $F \in \mathcal{F}$ que $F \cap A \neq \varnothing$, sinon $F \subset A^c$ et donc $A^c \subset \mathcal{F}$. Ainsi $\mathcal{F} \cup \{A\}$ a la propriété de l'intersection finie et le filtre engendré est strictement plus grand que $\mathcal{F}$.\\
+
+    Réciproquement, si $\mathcal{F}$ est un ultrafiltre, on ne peut avoir un filtre strictement plus fin que $\mathcal{F}$, puisqu'il contiendrait un ensemble $A \not\in \mathcal{F}$ et on aurait alors $A$ et $A^c$ contenu dans un seul filtre, donc $A \cap A^c = \varnothing$, absurde.\\
+\end{preuve}
+
+On connaît déjà des ultrafiltres, à savoir les filtres principaux sur les singletons. Les autres exemples qu'on n'a vu ne sont pas des ultrafiltres. Peut-on en trouver d'autres, sur un ensemble infini ? Oui, mais pas sans le choix. On peut en fait montrer qu'il existe des modèles de $\mathbf{ZF}$ sans ultrafiltre non principal sur $\mathbb{N}$. Ici, nous utiliserons sans y penser à deux fois l'axiome du choix dans toute sa généralité:
+
+\begin{proposition}
+    Tout filtre $\mathcal{F}$ est contenu dans un ultrafiltre
+\end{proposition}
+
+\begin{preuve}
+    Une union croissante de filtres étant encore un filtre (exercice !). Zorn sur l'ensemble des filtres plus fins que $\mathcal{F}$ fournit alors le résultat.\\
+\end{preuve}
+
+Pour $X$ un ensemble muni d'un (ultra)filtre $\mathcal{F}$, et $f: X \to Y$, on peut "transporter" l'(ultra)filtre sur $X$ à $Y$:
+\begin{proposition}
+    Si $\mathcal{F}$ est un (ultra)filtre sur un ensemble $\mathcal{X}$ et $f: X \to Y$ une application, $\mathcal{F}_f = \{A \subset Y \mid f^{-1}(A) \in \mathcal{F}\}$ est un (ultra)filtre sur $Y$.
+\end{proposition}
+
+\begin{preuve}
+    La condition $\varnothing \not\in \mathcal{F}_f$ est claire, et $f^{-1}(Y) = X \in \mathcal{F}$ donne $Y \in \mathcal{F}_f$. Si $A, B \in \mathcal{F}_f$, alors $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$ donne $A \cap B \in \mathcal{F}_f$. L'image réciproque est croissante selon l'inclusion, donc $\mathcal{F}_f$ est clos par sur-ensemble. Finalement, si $\mathcal{F}$ est un ultrafiltre et que $f^{-1}(A) \not \in \mathcal{F}$, alors $f^{-1}(A^c) = f^{-1}(A)^c \in \mathcal{F}$ et donc $A^c \in \mathcal{F}_f$.
+\end{preuve}
+
+\section{Les filtres en topologie}
+Maintenant que les définitions de base sont posées, on s'intéresse à l'utilisation des (ultra)filtres en topologie, avec comme ligne de mire la preuve du fameux théorème de Tychonov, qui énonce qu'un produit (quelconque) de quasi-compact est quasi-compact pour la topologie produit.
+\begin{proposition}
+    Soit $X$ un espace topologique. L'ensemble des voisinages $\mathcal{V}(x)$ d'un point $x \in X$ est un filtre
+\end{proposition}
+\begin{preuve}
+    $\varnothing$ ne contient pas $x$ donc n'est pas un voisinage de $x$. $X$ est un ouvert contenant $x$, donc un voisinage de $x$. L'intersection de deux voisinages de $x$ est encore un voisinage de $x$, puisque l'intersection de deux ouverts contenant $x$ est encore un ouvert contenant $x$. Finalement un sur-ensemble d'un voisinage de $x$ est clairement encore un voisinage de $x$.\\
+\end{preuve}
+
+On peut alors définir une notion de convergence d'un filtre:
+\begin{definition}
+    On dit qu'un filtre $\mathcal{F}$ sur un espace topologique $X$ converge vers un point $x \in X$ si il est plus fin que son filtre des voisinages.
+\end{definition}
+
+On note que cette définition généralise la notion de convergence d'une suite dans un espace topologique. En effet, si $f: \bN \to X$ est une suite et qu'on muni $\bN$ du filtre cofini qu'on note $\mathcal{F}^{\text{cofinite}}$, alors le filtre $(\mathcal{F}_f^{\text{cofinite}})$ converge vers $x$ si et seulement si $f$ converge vers $x$. Vérifiez le !\\
+
+\begin{proposition}
+    Un filtre $\mathcal{F}$ sur un espace topologique $X$ converge vers $x \in X$ si et seulement si pour tout ouvert $U$ contenant $x$, $U \in \mathcal{F}$.
+\end{proposition}
+
+\begin{preuve}
+    Le filtre engendré par les ouverts contenant $x$ est $\mathcal{V}(x)$.\\
+\end{preuve}
+
+On a le (très beau) théorème suivant, qui caractérise la compacité et la séparabilité d'un espace en fonction de la convergence des ultrafiltres sur cet espace.\\
+On note immédiatement que la première équivalence rappelle le cas métrique, avec le théorème de Bolzano-Weierstrass, qui énonce que toute suite dans un métrique compact admet une valeur d'adhérence.
+Le sens réciproque de la seconde équivalence rappelle quant à lui l'unicité de la limite d'une suite dans un espace séparé.\\
+\begin{theoreme}
+    Soit $X$ un espace topologique.
+    \begin{enumerate}
+        \item $X$ est quasi-compact si et seulement si tout ultrafiltre sur $X$ converge vers au moins un point.
+        \item $X$ est séparé si et seulement si tout ultrafiltre sur $X$ converge vers au plus un point.
+    \end{enumerate}
+\end{theoreme}
+\begin{preuve}
+    Soit $X$ un espace quasi-compact et $\mathcal{F}$ un ultrafiltre ne convergeant vers aucun point $x \in X$. On a pour tout $x \in X$ un ouvert $U_x$ contenant $x$ tel que $U_x \not\in \mathcal{F}$, et $(U_x)_{x \in X}$ recouvre $X$. On en extrait un sous-recouvrement fini $U_{x_1}, \ldots, U_{x_n}$.\\
+    Puisqu'on a $U_{x_i}^c \in \mathcal{F}$ pour tout $i$, on a également $\bigcap_{i=1}^{n}{U_{x_i}^c} = \left(\bigcup_{i=1}^{n}{U_{x_i}}\right)^c = X^c = \varnothing \in \mathcal{F}$, absurde.\\
+
+    Réciproquement, si on a $X$ un espace vérifiant que tout ultrafiltre converge vers un point, et qu'on a $(U_i)$ un recouvrement de $X$ n'admettant aucun sous-recouvrement fini, on peut considérer la famille $(U_i^c)$, qui a la propriété de l'intersection finie. Ainsi, il existe un ultrafiltre la contenant, et qui ne peut converger vers aucun point $x \in X$, puisqu'il existe $i$ tel que $x \in U_i$ et $U_i$ ne peut être dans cet ultrafiltre.\\
+
+    Soit $X$ un espace séparé et $\mathcal{F}$ un ultrafiltre convergent vers un point $x \in X$.
+    Soit $y \in X$, il existe $U_x, U_y$ tels que $x \in U_x, y \in U_y$ et $U_x \cap U_y = \varnothing$, par définition de la séparabilité. Ainsi $U_y \not\in \mathcal{F}$ et donc $\mathcal{F}$ ne converge pas vers $y$.\\
+
+    Réciproquement, soit $X$ un espace non séparé dans lequel tout ultrafiltre converge vers au plus un point.
+    On trouve $x, y \in X$ tels que pour tout ouvert $U_x$ contenant $x$ et tout ouvert $U_y$ contenant $y$, $U_x \cap U_y \neq \varnothing$. On a alors que l'ensemble des ouverts contenant $x$ ou $y$ a la propriété de l'intersection finie, donc qu'ils engendrent un filtre, à savoir $\mathcal{V}(x) \cup \mathcal{V}(y)$, puis que ce filtre est contenu dans un ultrafiltre, qui converge à la fois vers $x$ et $y$. Absurde.
+\end{preuve}
+
+Muni de ce théorème, on peut désormais montrer le théorème de Tychonov presque sans effort !\\
+Un petit lemme rapide avant ça, qu'on pourrait prouver par les filtres en utilisant le théorème plus haut mais qu'on va traiter à la main
+\begin{lemme}
+    Si $(X_i)_{i \in I}$ est une famille d'espaces topologiques séparé, alors le produit $X = \prod_{i \in I}{X_i}$ est lui-même séparé.
+\end{lemme}
+\begin{preuve}
+    Si $(x_i)_{i \in I}, (y_i)_{i \in I}$ sont deux éléments distincts de $X$, alors il existe $j \in I$ tels que $x_j \neq y_j$. Par séparation de $X_j$, on trouve donc $U_j^x, U_j^y$ ouverts dans $X_j$ tels que $x \in U_j^x, y \in U_j^y$ et $U_j^x \cap U_j^y = \varnothing$.\\
+    On considère alors $U^x = U_j^x \times \prod_{i \in I\setminus\{j\}}{X_i}$ et $U^y = U_j^y \times \prod_{i \in I\setminus\{j\}}{X_i}$, qui sont tous deux ouverts dans $X$, disjoints, et contenant respectivement $(x_i)_{i \in I}$ et $(y_i)_{i \in I}$.
+\end{preuve}
+
+\begin{theoreme}[Tychonov]
+    Soit $(X_i)_{i \in I}$ une famille d'espaces topologiques (quasi-)compacts. Alors $X = \prod_{i \in I}{X_i}$ est (quasi-)compact pour la topologie produit.
+\end{theoreme}
+\begin{preuve}
+    Soit $\mathcal{F}$ un ultrafiltre sur $X$ et $\pi_i: X \to X_i$ les projections.
+    On a, pour chaque $i \in I$, $\mathcal{F}_{\pi_i}$ qui est un ultrafiltre sur $X_i$, qui admet alors une limite $x_i$. \\
+    On veut alors montrer que $(x_i)_{i \in I}$ est une limite de $\mathcal{F}$, donc montrer que tout ouvert de $X$ contenant $(x_i)$ est contenu dans $\mathcal{F}$.\\
+    Les ouverts de la topologie produit étant formé des unions d'ouverts élémentaires, à savoir des ouverts de la forme
+    $$U_{j_1}\times \ldots \times U_{j_n} \times \left(\prod_{i \in I\setminus\{j_1, \ldots, j_n\}}{X_i}\right) \text{ où } U_{i_1}, \cdots, U_{i_n} \text{ ouvert dans respectivement } X_{i_1}, \ldots, X_{i_n}$$
+    et $\mathcal{F}$ étant clos par sur-ensemble, montrer que les ouverts élémentaires contenant $(x_i)_{i \in I}$ appartiennent à $\mathcal{F}$ suffit. Mieux encore, puisque tous les ouverts élémentaires sont intersection finie d'ouverts de la forme $U_j \times \prod_{i \in I\setminus\{j\}}{X_i}$ avec $U_j$ ouvert de $X_j$ et que $\mathcal{F}$ est stable par intersection finie,  il suffit de seulement montrer que ces ouverts sont dans $\mathcal{F}$.\\
+    Soit $U_j \in X_j$ un ouvert contenant $x_j$. Puisque $U_j \in \mathcal{F}_{\pi_j}$, $\pi_j^{-1}(U_j) = U_j \times \prod_{i \in I\setminus\{j\}}{X_i} \in \mathcal{F}$, ce qui conclut le cas quasi-compact.\\
+    Le cas compact suit alors du lemme précédent.
+\end{preuve}
+\end{document}
