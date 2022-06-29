@@ -6,6 +6,21 @@
 \author{Shika}
 \date{}
 
+% Résultant: 
+%   But: Pgcd en plus d'une variable, en privilégiant une variable
+%   Problème: Degré en la variable privilégiée qui varie
+%   Propriété: Le résultat vérifie une équation Bézout-like
+%   Propriété: Equivalence entre l'existence d'une racine commune dans une clôture et la nullité du résultat
+%   Propriété: Expression du résultat par les racines 
+%   Lien avec le théorème fondamental des fonctions symétriques
+%Discriminant:
+%   But: Si P a une racine multiple
+%   Propriété: Racine double <=> existence d'une racine commune à P et P'
+%   Propriété: Expression par les racines
+%Application:
+%   Ensemble des matrices à vp toutes distinctes de Mn(C) ouvert
+%   Intersection de deux courbes
+%   Cayley-Hamilton par Zariski 
 \begin{document}
 
 \maketitle
@@ -144,7 +159,7 @@ Reste à trouver le facteur: L'inspection du déterminant à l'aide des relation
 
 \section{Discriminant}
 
-Une application très naturelle du résultant en caractéristique nulle est le discriminant. On suppose donc $R$ de caractéristique null:
+Une application très naturelle du résultant en caractéristique nulle est le discriminant. On suppose donc $R$ de caractéristique nulle:
 
 \begin{definition}
     On appelle discriminant de $P \in R[X]$ la valeur $\Disc(P) = \Res(P, P')$.
@@ -222,7 +237,7 @@ On va déduire de cette observation le théorème suivant:
 
 L'application $f: M_n(\bC) \to \bC_n[X], M \mapsto \chi_M$ est continue, donc montrer qu'elle est nulle sur une partie dense de $M_n(\bC)$ suffit à montrer qu'elle est nulle. Montrons donc que $\mathcal{A}$ est dense dans $\bC$:\\
 
-On prend $M \in M_n(\bC)$, qu'on trigonalise en une matrice triangulaire supérieure $T$ dont on note $\lambda_1, \cdots, \lambda_n$ les coefficients diagonaux, qui sont les valeurs propres de $M = PTP^{-1}$. En les faisant légèrement varier, on peut construire une matrice triangulaire $T_k$ égale à $T$ sauf sur la diagonale, telle que $|T_{i,i} - (T_k)_{i, i}| \leq \frac{1}{k}$ pour tout $1 \leq i \leq n$. La matrice $T_k$ est alors dans $\mathcal{A}$ et la suite $(T_k)$ converge vers $T$. $PT_kP^{-1}$ est encore dans $\mathcal{A}$ (les valeurs propres sont invariantes par conjugaison), donc $(PT_kP^{-1})$ est une suite de $\mathcal{A}$ qui converge vers $M$, ce qui conclut.\\
+On prend $M \in M_n(\bC)$, qu'on trigonalise en une matrice triangulaire supérieure $T$ dont on note $\lambda_1, \cdots, \lambda_n$ les coefficients diagonaux, qui sont les valeurs propres de $M = PTP^{-1}$. En les faisant légèrement varier, on peut construire une matrice triangulaire $T_k$ égale à $T$ sauf sur la diagonale, telle que $|T_{i,i} - (T_k)_{i, i}| \leq \frac{1}{k}$ pour tout $1 \leq i \leq n$ et $T_k \in \mathcal{A}$. La matrice $T_k$ est alors dans $\mathcal{A}$ et la suite $(T_k)$ converge vers $T$. $PT_kP^{-1}$ est encore dans $\mathcal{A}$ (les valeurs propres sont invariantes par conjugaison), donc $(PT_kP^{-1})$ est une suite de $\mathcal{A}$ qui converge vers $M$, ce qui conclut.\\
 
 \subsubsection{Une généralisation sur $\bK$}
 
@@ -250,13 +265,13 @@ On peut voir $M_n(\bK)$ comme $\bK^{n^2}$, et on a alors une topologie sur $M_n(
     Soit $F \in \bK$ un fermé, donc un ensemble fini, alors $P^{-1}(F) = \bigcup_{x \in F}{V(P-x)}$ est fermé.
 \end{preuve}
 
-Pour le fait que $P^{-1}(0)$ est d'intérieur vide, on va avoir besoin du lemme suivant
+Pour le fait que $P^{-1}(0)$ est d'intérieur vide, on va avoir besoin du lemme suivant:
 \begin{lemme}
     Pour $\bK$ un corps infini et un polynôme $P \in K[X_1, \ldots, X_n]$ non-nul, $P^{-1}(\bK^\times)$ est infini.\\
 \end{lemme}
 
 \begin{preuve}
-    Le cas $n = 1$ est clair. On procède par récurrence. Supposons le résultat vrai au rang $n-1$, et soit $P = Q_nX_n^k + \cdots + Q_1X_n + Q_0$ où $Q_i \in K[X_1, \cdots, X_{n-1}]$. Le complémentaire des zéros de $Q_0\cdots Q_n$ est infini. Pour chacun des points $(x_1, \cdots, x_{n-1})$ de ce complémentaire, on a un nombre fini de $x_n$ tels que $(x_1, \cdots, x_n)$ annule $P$, donc une infinité qui ne l'annulent pas. On trouve ainsi une infinité de points dans $P^{-1}(\bK^\times)$
+    Le cas $n = 1$ est clair. On procède par récurrence. Supposons le résultat vrai au rang $n-1$, et soit $P = Q_nX_n^k + \cdots + Q_1X_n + Q_0$ où $Q_i \in K[X_1, \cdots, X_{n-1}]$. Le complémentaire des zéros de $Q_0\cdots Q_n$ est infini. Pour chacun des points $(x_1, \cdots, x_{n-1})$ de ce complémentaire, on a un nombre fini de $x_n$ tels que $(x_1, \cdots, x_n)$ annule $P$, donc une infinité qui ne l'annulent pas. On trouve ainsi une infinité de points dans $P^{-1}(\bK^\times)$\\
 \end{preuve}
 
 De ça, on déduit:
@@ -266,15 +281,7 @@ De ça, on déduit:
 \end{proposition}
 
 \begin{preuve}
-    On observe en premier lieu que quitte à plonger $\bK$ dans un corps infini, le résultat du lemme précédent est encore vrai. Maintenant, soit $V(E)^c$ un ouvert de $\bK^n$ et $V(E')^c$ un autre ouvert, on veut montrer $V(E)^c \cap V(E')^c \neq \varnothing$. Il suffit, pour $p_1 \in E, p_2 \in E'$ tous deux non-nuls, de montrer $V(p_1)^c \cap V(p_2)^c$ non-vide, puisque $V(p_1)^c \subset V(E)^c$ et $V(p_2)^c \subset V(E')^c$. Mais $V(p_1p_2) = V(p_1) \cup V(p_2)$, $V(p_1)^c \cap V(p_2)^c = V(p_1p_2)^c$,, donc non-vide.
-\end{preuve}
-
-\begin{proposition}
-    Soit $P \in K[X_1, \cdots, X_n]$ un polynôme. L'ensemble $P^{-1}(0)$ est d'intérieur vide dans $\bK^n$ muni de la topologie de Zariski.
-\end{proposition}
-
-\begin{preuve}
-    Supposons le contraire. On a alors $O = \bK^n \setminus V(E)$ tel que $P(O) = 0$. Mais $V(E)^c \cap V(P)^c = O \cap V(P)^c \neq \varnothing$, absurde.
+    On observe en premier lieu que quitte à plonger $\bK$ dans un corps infini, le résultat du lemme précédent est encore vrai. Maintenant, soit $V(E)^c$ un ouvert de $\bK^n$ et $V(E')^c$ un autre ouvert, on veut montrer $V(E)^c \cap V(E')^c \neq \varnothing$. Il suffit, pour $p_1 \in E, p_2 \in E'$ tous deux non-nuls, de montrer $V(p_1)^c \cap V(p_2)^c$ non-vide, puisque $V(p_1)^c \subset V(E)^c$ et $V(p_2)^c \subset V(E')^c$. Mais $V(p_1p_2) = V(p_1) \cup V(p_2)$, d'où $V(p_1)^c \cap V(p_2)^c = V(p_1p_2)^c$ qui est non-vide.\\
 \end{preuve}
 
 En combinant tout ça, on déduit:
