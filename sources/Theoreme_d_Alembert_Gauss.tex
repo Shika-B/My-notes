@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{prelude}
+
+\title{Théorème de d'Alembert-Gauss}
+\author{Shika}
+\date{June 2022}
+
+\begin{document}
+
+\maketitle
+
+On veut montrer le théorème suivant:
+
+\begin{theoreme}[d'Alembert-Gauss]
+    Tout polynôme $P \in \bC[X]$ non-constant a une racine.
+\end{theoreme}
+
+On minimisera les prérequis. Plus précisément, on admettra seulement le résultat suivant:
+
+\begin{theoreme}[Bolzano-Weierstrass]
+    Toute suite bornée de $\bR$ admet une sous-suite convergente
+\end{theoreme}
+
+\section{Prérequis analytiques}
+On notera la distance entre deux points du plan complexe $x = a+bi, y = c+di$ par $d(x, x) = |x-y| = \sqrt{(a-c)^2 + (b-d)^2}$.
+
+\begin{definition}
+    On définit la boule ouverte centrée en un point $c \in \bC$ et de rayon $r \in \bR^+$ par
+    $$B(c, r) = \{y \in \bC \mid d(x, y) < r\}$$
+    De manière analogue, on définit la boule fermée par
+    $$B_f(c, r) = \{y \in \bC \mid d(x, y) \leq r\}$$
+\end{definition}
+On définit alors ce que ça signifie pour une partie $A \subset \bC$ d'être bornée:
+\begin{definition}
+    Une partie $A \subset \bC$ est bornée si il existe un point $x \in \bC$ et un réel positif $r \in \bR^+$ tel que $A \subset B(x, r)$
+\end{definition}
+
+\begin{proposition}
+    Une partie $A \subset \bC$ est bornée si et seulement si il existe $M \in \bR^+$ tel que pour tout $a \in A$, $|a| \leq M$.
+\end{proposition}
+
+\begin{preuve}
+    Si $A \subset B(c, r)$ alors pour tout $a \in A$, $|a - c| < R$ d'où $|a| = |a-c + c| \leq |a-c| + |c| \leq r + |c|$. On pose $M = |r| + c$, ce qui conclut.\\
+    Pour l'autre sens, on a $A \subset B(0, M + 1)$.\\
+\end{preuve}
+
+Maintenant un lemme qui justifie de regarder la convergence dans $\bC$ comme une convergence "composante par composante":
+\begin{lemme}
+    Une suite $(x_n) = (a_n + b_ni)$ converge vers un point $x = a+bi$ si et seulement si $(a_n)$ converge vers $a$ et $(b_n)$ converge vers $b$.
+\end{lemme}
+
+\begin{preuve}
+    Exercice !
+\end{preuve}
+
+\begin{proposition}[Bolzano-Weierstrass dans $\bC$]
+    Soit $(x_n)$ une suite bornée. Alors il existe une sous-suite $(x_{\varphi(n)})$ qui converge vers un point $x \in \bC$.
+\end{proposition}
+
+\begin{preuve}
+    On pose $a_n = \Re(x_n)$ et $b_n = \Im(x_n)$. On vérifie que puisque $(x_n)$ est bornée, $(a_n)$ et $(b_n)$ le sont également: On a $M \in \bR^+$ tel que $|x_n| \leq M$, donc $|a_n|, |b_n| \leq |x_n| \leq M$. On peut donc extraire une sous-suite $(a_{\sigma(n)})$ de $(a_n)$ qui converge vers un point $a \in \bR$, par Bolzano-Weierstrass dans $\bR$.\\
+
+    Ici, on pourrait se dire qu'il en est de même de $(b_n)$, extraire une sous-suite $b_{\beta(n)}$ convergente vers un point $b$ et qu'alors on a une sous-suite de $(a_n + b_ni)$ qui converge vers le point $a + bi$. Ce raisonnement serait erroné. Les suites $(a_{\sigma(n)})$ et $(b_{\beta(n)})$ peuvent ne pas partager tous leurs points, voire même ne partager aucun point, et il serait alors impossible de définir une extractrice sur $(a_n + b_ni)$ qui aurait à la fois pour partie réelle la suite $(a_{\sigma(n)})$ et pour partie imaginaire la suite $(b_{\beta(n)})$. On peut cependant adapter cette idée.\\
+
+    On va en fait considérer la sous-suite $(b_{\sigma(n)})$, qui est encore bornée, et en extraire à nouveau une sous-suite $(b_{\sigma(\beta(n))})$, convergente vers un point $b \in \bR$. Puisque $a_{\sigma(\beta(n))}$ est une sous-suite de la suite convergente $(a_{\sigma(n)})$, elle converge encore vers la même limite, d'où $(a_{\sigma(\beta(n))})$ qui converge vers $a$ et $(b_{\sigma(\beta(n))})$ qui converge vers $b$. Le lemme précédent conclut.
+\end{preuve}
+
+\begin{definition}
+    On dit qu'une partie $F \subset \bC$ est fermée si pour toute suite $(x_n)$ à valeurs dans $F$ convergente, la limite est encore dans $F$
+\end{definition}
+
+\begin{proposition}
+    Les boules fermées sont fermées
+\end{proposition}
+
+\begin{preuve}
+    Soit $(x_n)$ à valeurs dans une boule $B_f(c, r)$, convergente vers $x \in \bC$. Pour tout $n$, on a $|x_n - c| \leq r$, et les inégalités larges passent à la limite, d'où $|x-c| \leq r$, et donc $x \in B_f(c, r)$.
+\end{preuve}
+
+On pose maintenant une définition dont la pertinence sera claire avec les résultats qui suivront
+
+\begin{definition}
+    On dit qu'une partie $K \subset \bC$ est compacte si elle vérifie la propriété suivante:\\
+    Pour toute suite $(x_n)$ de $K$, il existe une sous-suite de $(x_n)$ qui converge vers une limite $x \in K$
+\end{definition}
+
+\begin{proposition}
+    Une partie est compacte si et seulement si elle est fermée et bornée
+\end{proposition}
+
+\begin{preuve}
+    Soit $K$ une partie compacte:\\
+    - Si elle n'est pas bornée, alors pour tout $n \in \bN$, il existe $x_n$ tel que $|x_n| \geq n$. Une sous-suite convergera encore en module vers l'infini, absurde.\\
+    - Si elle n'est pas fermée, alors il existe $(x_n)$ à valeurs dans $K$ qui converge vers $x \not\in K$, et il en sera de même pour ses sous-suites, absurde.\\
+
+    Soit maintenant $F$ une partie fermée bornée et $(x_n)$ une suite de $F$. Parce que $F$ est bornée, par Bolzano-Weierstrass dans $\bC$, elle admet une sous-suite $(x_{\varphi(n)})$ convergente vers une limite $x$. Puisque $F$ est fermée, et que $(x_{\varphi(n)})$ est une suite de $F$, $x \in F$.
+\end{preuve}
+
+Maintenant, les résultats utiles promis sur les compacts:\\
+\begin{proposition}
+    Soit $K$ une partie compacte et $f: K \to \bC$ une fonction continue. Alors $f(K)$ est encore un compact.
+\end{proposition}
+
+\begin{preuve}
+    Soit $(y_n)$ une suite de $f(K)$. Pour chaque $n$, il existe $x_n \in K$ tel que $f(x_n) = y_n$. Puisque $K$ est compacte, $(x_n)$ admet une sous-suite convergente $(x_{\varphi(n)})$, de limite $x$. On a alors, par continuité, $\lim_n f(x_{\varphi(n)}) = \lim y_{\varphi(n)} = f(\lim_n x_{\varphi(n)}) = f(x) \in f(K)$.
+\end{preuve}
+
+\begin{proposition}
+    Une partie compacte admet un minimum et un maximum en module
+\end{proposition}
+
+\begin{preuve}
+    Soit $K$ un compact. L'application $f: \bC \to \bR^+, z \mapsto |z|$ est continue, d'où $f(K)$ compact. Mais $f(K)$ est une partie bornée de $\bR^+$, donc admet un sup et un inf, qu'on notera respectivement $M$ et $m$. Pour tout $n \in \bN$, il existe $x_n, y_n \in f(K)$ tel que $|m - x_n|, |M - y_n| \leq \frac{1}{n}$, donc $(x_n), (y_n)$ qui convergent vers $m$ et $M$ respectivement.
+\end{preuve}
+
+\section{Théorème de d'Alembert-Gauss}
+Soit $P = a_nX^n + \cdots + a_1X + a_0$ un polynôme non constant. On va diviser la preuve de l'existence d'une racine pour $P$ en trois étapes:
+\begin{enumerate}
+    \item D'abord on va montrer que l'infimum $m = \inf_{z \in \bC}{|P(z)|}$ en module de $P$ est atteint, autrement dit qu'il existe $z0 \in \bC$ tel que $|P(z0)| = m$
+    \item Ensuite, on va montrer que si $|P(z)| > 0$, alors pour tout $r > 0$, il existe $\theta \in [0,1[$ tel que $|P(z + r e^{2i\pi\theta})| < |P(z)|$
+    \item On conclura finalement que si $|P(z0)| > 0$, alors il existe $z$ tel que $|P(z0+z)| < |P(z0)|$, absurde.
+\end{enumerate}
+
+Pour la première partie, on va remarquer que $\lim_{|z| \to +\infty}{|P(z)|} = +\infty$, puisqu'un polynôme est équivalent à son terme de plus haut degré en l'infini, et donc qu'il existe $\eta$ tel que si $|z| > \eta$, alors $|P(z)| > m$.\\
+Suit que $m = \inf_{z \in B_f(0, \eta)}{|P(z)|}$. Mais $B_f(0, \eta)$ est compact, donc l'infimum est atteint en un point $z_0 \in B_f(0, \eta)$ ! Quitte à translater en posant $P'(X) = P(X-z_0)$, on peut supposer que $z_0 = 0$.\\
+
+On veut maintenant montrer, pour $r > 0$ fixé, qu'il existe $\theta \in [0,1[$ tel que $|P(r e^{2i\pi\theta})| < |P(0)|$.\\
+L'inégalité se réécrit
+$$|a_nr^ne^{2ni\pi\theta} + \cdots + a_1re^{2i\pi\theta} + a_0| < |a_0|$$
+On veut donc que le vecteur $P(r e^{2i\pi\theta}) - a_0$ soit assez petit et aille dans le sens opposé à $a_0$, pour réduire le module. Algébriquement, on s'y prend ainsi:
+On note $a_k = \alpha_i e^{2i\pi\beta_i}$ pour tout $0 \leq i \leq n$ et on note également $k$ le plus petit entier positif tel que $a_k \neq 0$. On a alors
+$$|P(r e^{2i\pi\theta})| = |o(r^k) + a_kr^ke^{2ki\pi\theta} + a_0| \leq |o(r^k)| + |\alpha_k r^ke^{2ki\pi(\theta + \beta_k)} + \alpha_0 e^{2i\pi\beta_0}| = |o(r^k)| + |\alpha_kr^ke^{2ki\pi(\theta + \beta_k - \beta_0)} + \alpha_0|$$
+On choisit $\theta = \frac{\frac{1}{2} - \beta_k + \beta_0}{k}$, de sorte que $\alpha_kr^ke^{2ki\pi(\theta + \beta_k - \beta_0)}$ soit un réel de signe opposé à $\alpha_0$ si $r$ est positif, puisque $e^{2ki\pi(\theta + \beta_k - \beta_0)} = e^{i\pi}= -1$, d'où alors $$|P(re^{2i\pi\theta})| \leq |o(r^k)| + |\alpha_0 - \alpha_kr^k|$$
+
+Reste à choisir $r$ assez petit, de sorte à pouvoir ignorer en module le terme en $o(r^k)$ par rapport au terme $\alpha_kr^k$. Il faut aussi s'assurer que $r^k$ ne soit pas trop grand, de sorte à ce qu'on aille pas trop loin dans le sens opposé à $\alpha_0$ et qu'on gagne finalement en module. Concrètement, on veut $|o(r^k)| < \alpha_kr^k$ et $\alpha_kr^k < \alpha_0$, ce qui est clairement possible pour $r$ assez petit.\\
+
+Par ce choix de $r$, on a alors $|\alpha_0 - \alpha_kr^k| = \alpha_0 - \alpha_0 - \alpha_kr^k$
+On a ainsi $$|P(re^{2i\pi\theta})| \leq |o(r^k)| + |\alpha_0 - \alpha_kr^k| < \alpha_kr^k + \alpha_0 - \alpha_kr^k = |\alpha_0| = |a_0| = |P(0)|$$
+précisément ce qu'on voulait !
+\end{document}
