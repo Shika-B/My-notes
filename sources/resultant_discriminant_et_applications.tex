@@ -35,84 +35,84 @@ On fixe tout le long du document, sauf mention explicite du contraire, que $R$ e
 
 \subsection{Existence d'un facteur commun}
 
-Supposons que $P$ et $Q$ admettent un facteur commun non trivial, qu'on notera $S$. On peut alors écrire $P = SA$ et $Q = SB$ avec $A \in R_{n-1}[X], B \in R_{m-1}[X]$.
+Supposons que $P$ et $Q$ admettent un facteur commun non trivial, qu'on notera $S$. On peut alors écrire $P = SA$ et $Q = SB$ avec $A \in R_{n-1}[X], B \in R_{m-1}[X]$. 
 De là, l'équation $UP + VQ = 0$, d'inconnues $U$ et $V$, admet un couple solution dans un $R_{m-1}[X] \times R_{n-1}[X]$, donné par $(U, V) = (B, -A)$. Réciproquement, si $P$ est premier avec $Q$ et qu'on a $U, V \in R[X]$ tels que $PU = QV$, alors $P \mid V$, donc $\deg(V) \geq \deg(P)$, et symétriquement $\deg(U) \geq \deg(Q)$. On a donc la proposition suivante:
 
 \begin{proposition}
-    Deux polynômes $P, Q \in R[X]$ ont un pgcd non trivial si et seulement si leur équation de Bézout associée
-    $$PU + QV = 0$$
-    admet une solution non triviale $U, V \in R[X]$ avec $\deg(U) < m$ et $\deg(V) < n$
+Deux polynômes $P, Q \in R[X]$ ont un pgcd non trivial si et seulement si leur équation de Bézout associée 
+$$PU + QV = 0$$
+admet une solution non triviale $U, V \in R[X]$ avec $\deg(U) < m$ et $\deg(V) < n$
 \end{proposition}
 
-On peut observer que cette équation est en fait un système, et un système linéaire. C'est ce qui va nous permettre de l'étudier.
+On peut observer que cette équation est en fait un système, et un système linéaire. C'est ce qui va nous permettre de l'étudier. 
 On a $R_{n+m-1}[X] = R_{m-1}[X] \oplus X^mR_{n-1}[X]$, ce qui nous permet de définir l'endomorphisme de modules
 
 $$\varphi_{P, Q}: \begin{array}{rcl}
-         & (R_{m-1}[X] \oplus X^mR_{n-1}[X]) \to R_{n+m-1}[X] \\
-         & U + X^mV \mapsto PU + QV
-    \end{array}$$
+&(R_{m-1}[X] \oplus X^mR_{n-1}[X]) \to R_{n+m-1}[X]\\
+&U + X^mV \mapsto PU + QV
+\end{array}$$
 
 La matrice de $\varphi$ dans la base canonique sera d'un intérêt particulier, on la nomme donc:
 
 \begin{definition}
-    On appelle matrice de Sylvester de $P$ et $Q$ la matrice d'ordre $(n+m) \times (n+m)$
-    $$ S_{P, Q} =
-        \begin{pmatrix}
-            p_{n}   & 0       & \cdots & 0       & q_{m}  & 0      & \cdots & 0      \\
-            p_{n-1} & p_{n}   & \ddots & \vdots  & \vdots & q_{m}  & \ddots & \vdots \\
-            \vdots  & p_{n-1} & \ddots & 0       & \vdots &        & \ddots & 0      \\
-            \vdots  & \vdots  & \ddots & p_{n}   & q_{1}  &        &        & q_{m}  \\
-            p_{0}   &         &        & p_{n-1} & q_{0}  & \ddots & \vdots & \vdots \\
-            0       & \ddots  &        & \vdots  & 0      & \ddots & q_{1}  & \vdots \\
-            \vdots  & \ddots  & p_{0}  & \vdots  & \vdots & \ddots & q_{0}  & q_{1}  \\
-            0       & \cdots  & 0      & p_{0}   & 0      & \cdots & 0      & q_{0}
-        \end{pmatrix}$$
-    Formellement
-    $$(S_{P, Q})_{i, j} =
-        \begin{cases}
-            p_{n+j-i} \textrm{ si } 1 \leq i \leq m, 1 \leq j \leq n       \\
-            q_{j-i} \textrm{ si } m+1 \leq i \leq n+m, 1 \leq i \leq n + m \\
-            0 \textrm{ sinon}
-        \end{cases}$$
+On appelle matrice de Sylvester de $P$ et $Q$ la matrice d'ordre $(n+m) \times (n+m)$
+$$ S_{P, Q} =
+\begin{pmatrix}
+p_{n}&0&\cdots &0&q_{m}&0&\cdots &0\\
+p_{n-1}&p_{n}&\ddots &\vdots &\vdots &q_{m}&\ddots &\vdots \\
+\vdots &p_{n-1}&\ddots &0&\vdots &&\ddots &0\\
+\vdots &\vdots &\ddots &p_{n}&q_{1}&&&q_{m}\\
+p_{0}&&&p_{n-1}&q_{0}&\ddots &\vdots &\vdots \\
+0&\ddots &&\vdots &0&\ddots &q_{1}&\vdots \\
+\vdots &\ddots &p_{0}&\vdots &\vdots &\ddots &q_{0}&q_{1}\\
+0&\cdots &0&p_{0}&0&\cdots &0&q_{0}
+\end{pmatrix}$$
+Formellement 
+$$(S_{P, Q})_{i, j} = 
+\begin{cases}
+p_{n+j-i} \textrm{ si } 1 \leq i \leq m, 1 \leq j \leq n \\
+q_{j-i} \textrm{ si } m+1 \leq i \leq n+m, 1 \leq i \leq n + m\\
+0 \textrm{ sinon}
+\end{cases}$$
 \end{definition}
 
 On a alors immédiatement
 
 \begin{proposition}
-    Le couple $(X, Y) \in R_{m-1}[X] \times R_{n-1}[X]$ est solution de l'équation de Bézout
-    $$PX + QY = 0$$
-    si et seulement si
-    $$S_{P, Q}\begin{pmatrix}X' \\ Y' \end{pmatrix} = 0$$
-    où $X'$ et $Y'$ sont les vecteurs colonnes induits respectivement par X et Y, en écrivant leurs coefficients par indices décroissants.
+Le couple $(X, Y) \in R_{m-1}[X] \times R_{n-1}[X]$ est solution de l'équation de Bézout 
+$$PX + QY = 0$$
+si et seulement si
+$$S_{P, Q}\begin{pmatrix}X' \\ Y' \end{pmatrix} = 0$$
+où $X'$ et $Y'$ sont les vecteurs colonnes induits respectivement par X et Y, en écrivant leurs coefficients par indices décroissants.
 \end{proposition}
 et donc
 
 \begin{theoreme}
-    $P$ et $Q$ ont un facteur commun non trivial si et seulement si $\det(S_{P, Q}) = 0$.
+$P$ et $Q$ ont un facteur commun non trivial si et seulement si $\det(S_{P, Q}) = 0$.
 \end{theoreme}
 
 Cette valeur $\det(S_{P, Q})$ est souvent utile, on lui donne donc un nom, le résultant:
 
 \begin{definition}
-    On appelle résultant de deux polynômes $P, Q \in R[X]$ la valeur $\Res(P, Q) = \det(S_{P, Q})$.
+On appelle résultant de deux polynômes $P, Q \in R[X]$ la valeur $\Res(P, Q) = \det(S_{P, Q})$.
 \end{definition}
 
 On fait maintenant un petit détour par la théorie des modules pour montrer un dernier résultat sur le résultant, qui généralise les résultats précédents:
 
 \begin{proposition}
-    Soit $M$ un $R$-module libre de rang $n$ de base $\mathcal{B} = (e_1, \cdots, e_n)$ et $(x_1, \cdots, x_n)$ un $n$-uplet de $M$, qui engendre un sous-module $N$. Alors pour $d =\det_\mathcal{B}(x_1, \cdots, x_n)$ on a $dM \subset N$.
+Soit $M$ un $R$-module libre de rang $n$ de base $\mathcal{B} = (e_1, \cdots, e_n)$ et $(x_1, \cdots, x_n)$ un $n$-uplet de $M$, qui engendre un sous-module $N$. Alors pour $d =\det_\mathcal{B}(x_1, \cdots, x_n)$ on a $dM \subset N$.
 \end{proposition}
 
 \begin{preuve}
-    On écrit $x_j = x_{1, j}e_1 + \cdots x_{n, j}e_n$ pour $x_{i, j} \in \bR$ et on pose $M$ la matrice des $x_{i, j}$. En notant $M_{i, j}$ les cofacteurs et en développant selon la $i$-ème ligne, on trouve $d = \sum_{j=1}^{n}{(-1)^{i+j}x_{i,j}\det(M_{i, j})}$. En sommant sur $i$, on obtient alors $de_k = \sum_{j=1}^{n}{(-1)^{i+j}x_j\det(M_{i, j})}$, ce qui conclut.\\
+On écrit $x_j = x_{1, j}e_1 + \cdots x_{n, j}e_n$ pour $x_{i, j} \in \bR$ et on pose $M$ la matrice des $x_{i, j}$. En notant $M_{i, j}$ les cofacteurs et en développant selon la $i$-ème ligne, on trouve $d = \sum_{j=1}^{n}{(-1)^{i+j}x_{i,j}\det(M_{i, j})}$. En sommant sur $i$, on obtient alors $de_k = \sum_{j=1}^{n}{(-1)^{i+j}x_j\det(M_{i, j})}$, ce qui conclut.\\
 \end{preuve}
 Et maintenant le théorème:
 \begin{theoreme}
-    Il existe $U \in R_{m-1}[X], V \in R_{n-1}[X]$ tels que $PU + QV = R(P, Q)$
+Il existe $U \in R_{m-1}[X], V \in R_{n-1}[X]$ tels que $PU + QV = R(P, Q)$
 \end{theoreme}
 
 \begin{preuve}
-    On considère donc $M = R_{n+m-1}[X]$, $\mathcal{B}$ la base canonique de $M$ et $x_i$ la $i$-ème colonne de $S_{P, Q}$. Le résultat nous dit alors que $\det_{\mathcal{B}}(x_1, \cdots, x_n)R_{n+m-1}[X] = \Res(P, Q)R_{n+m-1}[X] \subset \Im(\varphi_{P, Q}) = \{PU + QV \mid \deg(U) < m, \deg(V) < n\}$. En particulier, il existe $U$ et $V$ satisfaisant la condition sur les degrés tels que $R(P, Q) = PU + QV$.
+On considère donc $M = R_{n+m-1}[X]$, $\mathcal{B}$ la base canonique de $M$ et $x_i$ la $i$-ème colonne de $S_{P, Q}$. Le résultat nous dit alors que $\det_{\mathcal{B}}(x_1, \cdots, x_n)R_{n+m-1}[X] = \Res(P, Q)R_{n+m-1}[X] \subset \Im(\varphi_{P, Q}) = \{PU + QV \mid \deg(U) < m, \deg(V) < n\}$. En particulier, il existe $U$ et $V$ satisfaisant la condition sur les degrés tels que $R(P, Q) = PU + QV$.
 \end{preuve}
 
 \subsection{Expression du résultant en fonction des racines}
@@ -124,37 +124,37 @@ Plus précisément, on va se placer sur l'anneau $R[A, B, (A_i)_{i \in I}, (B_j)
 Dans ce contexte, le résultant $\Res(P, Q)$ est un polynôme de $R[A, B, (A_i)_{i \in I}, (B_j)_{j \in J}]$, résultant qui sera nul si on trouve $(i, j) \in I \times J$ tels que $A_i = B_j$, puisqu'on a alors une racine commune à $P$ et $Q$. Ca nous mène au lemme suivant:
 
 \begin{lemme}
-    Pour tout couple $(i, j) \in I \times J$, la relation $(A_i - B_j) \mid \Res(P, Q)$ est vérifiée.
+Pour tout couple $(i, j) \in I \times J$, la relation $(A_i - B_j) \mid \Res(P, Q)$ est vérifiée.
 \end{lemme}
 
 \begin{preuve}
-    On pose $p$ la projection canonique de $R[A, B, (A_i)_{i \in I}, (B_j)_{j \in J}]$ dans son quotient par l'idéal engendré par $A_i - B_j$.\\
-    Puisque d'un côté on a $p(\Res(P, Q)) = \Res(p(P), p(Q))$, un morphisme d'anneau préservant les polynômes, et que de l'autre on a $\Res(p(P), p(Q)) = 0$, par le constat qui précède le lemme, on en déduit $(A_i - B_j) \mid \Res(P, Q)$, ce qu'on voulait.
+On pose $p$ la projection canonique de $R[A, B, (A_i)_{i \in I}, (B_j)_{j \in J}]$ dans son quotient par l'idéal engendré par $A_i - B_j$.\\
+Puisque d'un côté on a $p(\Res(P, Q)) = \Res(p(P), p(Q))$, un morphisme d'anneau préservant les polynômes, et que de l'autre on a $\Res(p(P), p(Q)) = 0$, par le constat qui précède le lemme, on en déduit $(A_i - B_j) \mid \Res(P, Q)$, ce qu'on voulait.
 \end{preuve}
 
 \begin{proposition}
-    Le polynôme $\prod_{i, j}{(A_i-B_j)}$ divise $\Res(P, Q)$.
+Le polynôme $\prod_{i, j}{(A_i-B_j)}$ divise $\Res(P, Q)$.
 \end{proposition}
 
 \begin{preuve}
-    Les polynômes $(A_i - B_j)$ sont deux à deux premiers entre eux et divisent tous $\Res(P, Q)$, donc leur produit aussi.\\
+Les polynômes $(A_i - B_j)$ sont deux à deux premiers entre eux et divisent tous $\Res(P, Q)$, donc leur produit aussi.\\
 \end{preuve}
 
 On va montrer qu'en fait, à un facteur de $R[A, B]$ près, les polynômes sont égaux, en comparant les degrés en chacune des autres indéterminées:
 
 \begin{lemme}
-    Pour tout $i \in I$, $\deg_{A_i}(\Res(P, Q)) = |J|$. Similairement $\deg_{B_j}(\Res(P, Q)) = |I|$ pour tout $j \in J$.
+Pour tout $i \in I$, $\deg_{A_i}(\Res(P, Q)) = |J|$. Similairement $\deg_{B_j}(\Res(P, Q)) = |I|$ pour tout $j \in J$.
 \end{lemme}
 
 \begin{preuve}
-    En regardant les relations coefficients-racines, on voit que pour chaque $0 \leq k \leq |I|$, le $k$-ème coefficient $p_k$ sera de degré $1$ en $A_i$. On voit aussi que dans le développement en somme sur $\mathfrak{S}_n$ du déterminant de $S_{P, Q}$, on aura au plus $m$ facteurs qui seront des coefficients de $p_k$ dans chaque terme de la somme, majoration atteinte pour l'identité. La preuve est analogue pour le degré en les $B_j$.\\
+En regardant les relations coefficients-racines, on voit que pour chaque $0 \leq k \leq |I|$, le $k$-ème coefficient $p_k$ sera de degré $1$ en $A_i$. On voit aussi que dans le développement en somme sur $\mathfrak{S}_n$ du déterminant de $S_{P, Q}$, on aura au plus $m$ facteurs qui seront des coefficients de $p_k$ dans chaque terme de la somme, majoration atteinte pour l'identité. La preuve est analogue pour le degré en les $B_j$.\\
 \end{preuve}
 
 Reste à trouver le facteur: L'inspection du déterminant à l'aide des relations coefficient-racine, encore une fois, montre que le seul monôme de $R[A, B][(A_i)_{i \in I}, (B_j)_{j \in J}]$ de degré $n^m$ en les $A_i$ est celui obtenu en faisant le produit des termes diagonaux, monôme de coefficient $A^mB^n$. On conclut:
 
 \begin{theoreme}
-    On a l'identité $\Res(P, Q) = A^mB^n\prod_{i, j}{(A_i-B_j)}$. En évaluant, on trouve:
-    $$\Res\left(\alpha \prod_{i \in I}{(X-\alpha_i)}, \beta\prod_{j \in J}{(X-\beta_j)}\right) =  \alpha^m\beta^n\prod_{i, j}{(\alpha_i-\beta_j)}$$
+On a l'identité $\Res(P, Q) = A^mB^n\prod_{i, j}{(A_i-B_j)}$. En évaluant, on trouve:
+$$\Res\left(\alpha \prod_{i \in I}{(X-\alpha_i)}, \beta\prod_{j \in J}{(X-\beta_j)}\right) =  \alpha^m\beta^n\prod_{i, j}{(\alpha_i-\beta_j)}$$
 \end{theoreme}
 
 \section{Discriminant}
@@ -162,59 +162,59 @@ Reste à trouver le facteur: L'inspection du déterminant à l'aide des relation
 Une application très naturelle du résultant en caractéristique nulle est le discriminant. On suppose donc $R$ de caractéristique nulle:
 
 \begin{definition}
-    On appelle discriminant de $P \in R[X]$ la valeur $\Disc(P) = \Res(P, P')$.
+On appelle discriminant de $P \in R[X]$ la valeur $\Disc(P) = \Res(P, P')$.
 \end{definition}
 
 Bien sûr, le nom n'est pas choisi au hasard, c'est une généralisation du bien connu discriminant d'un trinôme du second degré, qu'on retrouve presque en calculant $\Disc(ax^2 + bx + c)$:
 
 \begin{align*}
-    \Res(ax^2 + bx + c, 2ax + b) & =                   \\
-    \begin{vmatrix}
-        a & 0 & 0 & 0  & 0  \\
-        b & a & 0 & 0  & 0  \\
-        c & b & a & 2a & 0  \\
-        0 & c & b & b  & 2a \\
-        0 & 0 & c & 0  & b
-    \end{vmatrix}
-    = a\begin{vmatrix}
-           a & 0 & 0  & 0  \\
-           b & a & 2a & 0  \\
-           c & b & b  & 2a \\
-           0 & c & 0  & b
-       \end{vmatrix}
-                                 & = a^2\begin{vmatrix}
-                                            a & 2a & 0  \\
-                                            b & b  & 2a \\
-                                            c & 0  & b
-                                        \end{vmatrix}
-    = a^2\left(a\begin{vmatrix}
-                    b & 2a \\
-                    0 & b
-                \end{vmatrix} - 2a\begin{vmatrix}
-                                      b & 2a \\
-                                      c & b
-                                  \end{vmatrix}\right)
-    = a^3(4ac - b^2)
+\Res(ax^2 + bx + c, 2ax + b) &=\\
+\begin{vmatrix}
+a & 0 & 0 & 0  & 0 \\
+b & a & 0 & 0  & 0 \\
+c & b & a & 2a & 0 \\
+0 & c & b & b  & 2a\\
+0 & 0 & c & 0  & b
+\end{vmatrix} 
+= a\begin{vmatrix}
+a & 0 & 0  & 0 \\
+b & a & 2a & 0 \\
+c & b & b  & 2a\\
+0 & c & 0  & b
+\end{vmatrix}
+&= a^2\begin{vmatrix}
+a & 2a & 0 \\
+b & b  & 2a\\
+c & 0  & b
+\end{vmatrix}
+= a^2\left(a\begin{vmatrix}
+b  & 2a\\
+0  & b
+\end{vmatrix} - 2a\begin{vmatrix}
+b & 2a\\
+c & b
+\end{vmatrix}\right)
+= a^3(4ac - b^2)
 \end{align*}
 Clairement, notre discriminant s'annule si et seulement si le discriminant usuel du lycée s'annule. En fait:
 \begin{proposition}
-    Le discriminant de $P$ est nul si et seulement si $P$ a une racine double dans une clôture algébrique.
+Le discriminant de $P$ est nul si et seulement si $P$ a une racine double dans une clôture algébrique.
 \end{proposition}
 
 \begin{preuve}
-    Supposons qu'on puisse écrire $P = (X-\alpha)^2U$. On a alors l'égalité
-    $$P' = (X-\alpha)[(X-\alpha)U]' + (X-\alpha)U = (X-\alpha)([(X-\alpha)U]' + U)$$
-    et $P$ et $P'$ ont un facteur commun, d'où $\Disc(P) = = \Res(P, P') = 0$.\\
-    Réciproquement supposons que $\Disc(P) = 0$. Alors $P$ et $P'$ ont un facteur commun irréductible sur $R$, disons $I$. On a alors $P = IQ$ et $I \mid P' = IQ' + I'Q$ d'où $I \mid Q$. Suit que $I^2 \mid P$, et donc qu'une racine de $I$ dans une clôture est une racine double de $P$.
+Supposons qu'on puisse écrire $P = (X-\alpha)^2U$. On a alors l'égalité 
+$$P' = (X-\alpha)[(X-\alpha)U]' + (X-\alpha)U = (X-\alpha)([(X-\alpha)U]' + U)$$
+et $P$ et $P'$ ont un facteur commun, d'où $\Disc(P) = = \Res(P, P') = 0$.\\
+Réciproquement supposons que $\Disc(P) = 0$. Alors $P$ et $P'$ ont un facteur commun irréductible sur $R$, disons $I$. On a alors $P = IQ$ et $I \mid P' = IQ' + I'Q$ d'où $I \mid Q$. Suit que $I^2 \mid P$, et donc qu'une racine de $I$ dans une clôture est une racine double de $P$.
 \end{preuve}
 
 \begin{proposition}
-    Si $P = \alpha\prod_{i}{(X-\alpha_i)}$ alors $\Disc(P) = \alpha^{2n-1}\prod_{i \neq j}{(\alpha_i-\alpha_j)}$
+Si $P = \alpha\prod_{i}{(X-\alpha_i)}$ alors $\Disc(P) = \alpha^{2n-1}\prod_{i \neq j}{(\alpha_i-\alpha_j)}$
 \end{proposition}
 
 \begin{preuve}
-    On a $P' = \alpha\sum_{k=1}^{n}\prod_{i=1, i \neq k}^{n}{(X-\alpha_j)}$ et donc
-    $$\Res(P, P')  = \alpha^{n-1}\prod_{i=1}^{n}{P'(\alpha_i)} = \alpha^{n-1} \prod_{i=1}^{n}{\alpha\prod_{j=1, j \neq i}^{n}{(\alpha_i-\alpha_j)}} = \alpha^{2n-1}\prod_{i \neq j}{(\alpha_i-\alpha_j)}$$
+On a $P' = \alpha\sum_{k=1}^{n}\prod_{i=1, i \neq k}^{n}{(X-\alpha_j)}$ et donc 
+$$\Res(P, P')  = \alpha^{n-1}\prod_{i=1}^{n}{P'(\alpha_i)} = \alpha^{n-1} \prod_{i=1}^{n}{\alpha\prod_{j=1, j \neq i}^{n}{(\alpha_i-\alpha_j)}} = \alpha^{2n-1}\prod_{i \neq j}{(\alpha_i-\alpha_j)}$$
 \end{preuve}
 
 On liste quelques applications du résultant et du discriminant
@@ -226,13 +226,13 @@ On liste quelques applications du résultant et du discriminant
 \subsubsection{Une preuve sur $\bC$}
 
 Soit $\mathcal{A}$ l'ensemble des matrices de $M_n(\bC)$ à valeurs propres deux à deux distinctes. Les matrices de $\mathcal{A}$ sont diagonalisables, puisque leurs polynômes caractéristiques sont nécessairement scindés à racines simples. On a donc, pour tout $M \in \mathcal{A}$, $M = PDP^{-1}$ pour $P$ diagonale.\\
-Si on regarde alors le polynôme caractéristique de $M$, on
+Si on regarde alors le polynôme caractéristique de $M$, on 
 $$\chi_M(X) = \det(PDP^{-1} - XI_n) = \det(P(D - XI_n)P^{-1}) = \det(P)\det(P)^{-1}\det(D - XI_n) = \chi_D(X)$$
 On voit dans ces égalités que pour montrer l'identité $\chi_M(M) = 0$, il suffit de montrer $\chi_D(M) = P\chi_D(D)P^{-1} = 0$, ce qui est clair puisque $D$ est une matrice diagonale.\\
 On va déduire de cette observation le théorème suivant:
 
 \begin{theoreme}[Cayley-Hamilton sur $\bC$]
-    Pour tout $M \in M_n(\bC)$, $\chi_M(M) = 0$.
+Pour tout $M \in M_n(\bC)$, $\chi_M(M) = 0$.
 \end{theoreme}
 
 L'application $f: M_n(\bC) \to \bC_n[X], M \mapsto \chi_M$ est continue, donc montrer qu'elle est nulle sur une partie dense de $M_n(\bC)$ suffit à montrer qu'elle est nulle. Montrons donc que $\mathcal{A}$ est dense dans $\bC$:\\
@@ -244,77 +244,77 @@ On prend $M \in M_n(\bC)$, qu'on trigonalise en une matrice triangulaire supéri
 On peut fortement généraliser cette preuve, puisqu'elle marche en fait sur tout corps. La clé est de définir une topologie sur $M_k(\bK)$ pour $\bK$ un corps quelconque, donc a priori pas muni d'une topologie canonique. On définit pour cela une topologie sur $\bK^n$ appelée topologie de Zariski:
 
 \begin{lemme}
-    L'ensemble des parties de la forme $V(E) = \{x \in \bK^n \mid \forall f \in E, f(x) = 0 \}$ pour $E \subset \bK[X_1, \cdots, X_n]$ vérifie les axiomes d'une base de fermés sur $\bK^n$
+L'ensemble des parties de la forme $V(E) = \{x \in \bK^n \mid \forall f \in E, f(x) = 0 \}$ pour $E \subset \bK[X_1, \cdots, X_n]$ vérifie les axiomes d'une base de fermés sur $\bK^n$
 \end{lemme}
 
 \begin{preuve}
-    On a $V(\{0\}) = \bK^n, V(\{1\}) = \varnothing$, et $\bigcup_{i=1}^{n}{V(E_i)} = V(E)$ où $E = \{f_1\cdots f_n \mid f_i \in E_i, 1 \leq i \leq n\}$
+On a $V(\{0\}) = \bK^n, V(\{1\}) = \varnothing$, et $\bigcup_{i=1}^{n}{V(E_i)} = V(E)$ où $E = \{f_1\cdots f_n \mid f_i \in E_i, 1 \leq i \leq n\}$
 \end{preuve}
 
 \begin{definition}
-    On appelle topologie de Zariski sur $\bK^n$ la topologie engendrée par la base de fermés $(F_E)_{E \subset  \bK[X_1, \cdots, X_n]}$ du lemme précédent.
+On appelle topologie de Zariski sur $\bK^n$ la topologie engendrée par la base de fermés $(F_E)_{E \subset  \bK[X_1, \cdots, X_n]}$ du lemme précédent.
 \end{definition}
 
 On peut voir $M_n(\bK)$ comme $\bK^{n^2}$, et on a alors une topologie sur $M_n(\bK)$. Pour la preuve précédente, on utilisait deux éléments cruciaux de la topologie canonique sur $M_n(\bC)$, à savoir que les polynômes y sont continus et que $\mathcal{A}$ y est dense. On va montrer que tous les polynômes sont encore continus pour la topologie de Zariski et que les ouverts de Zariski sont denses. L'écriture $\mathcal{A} = \{M \in M_n(\bR) \mid \Disc(\chi_M) \neq 0\}$ pour $\chi_A$ vu comme un polynôme en $n^2 + 1$ variables nous permettra de conclure que $\mathcal{A}$ est ouvert, donc dense.
 
 \begin{proposition}
-    Soit $P \in K[X_1, \cdots, X_n]$ un polynôme. L'application $P: \bK^n \to \bK$ est continue pour la topologie de Zariski sur $\bK^n$ et $\bK$.
+Soit $P \in K[X_1, \cdots, X_n]$ un polynôme. L'application $P: \bK^n \to \bK$ est continue pour la topologie de Zariski sur $\bK^n$ et $\bK$.
 \end{proposition}
 
 \begin{preuve}
-    Soit $F \in \bK$ un fermé, donc un ensemble fini, alors $P^{-1}(F) = \bigcup_{x \in F}{V(P-x)}$ est fermé.
+Soit $F \in \bK$ un fermé, donc un ensemble fini, alors $P^{-1}(F) = \bigcup_{x \in F}{V(P-x)}$ est fermé.
 \end{preuve}
 
 Pour le fait que $P^{-1}(0)$ est d'intérieur vide, on va avoir besoin du lemme suivant:
 \begin{lemme}
-    Pour $\bK$ un corps infini et un polynôme $P \in K[X_1, \ldots, X_n]$ non-nul, $P^{-1}(\bK^\times)$ est infini.\\
+Pour $\bK$ un corps infini et un polynôme $P \in K[X_1, \ldots, X_n]$ non-nul, $P^{-1}(\bK^\times)$ est infini.\\
 \end{lemme}
 
 \begin{preuve}
-    Le cas $n = 1$ est clair. On procède par récurrence. Supposons le résultat vrai au rang $n-1$, et soit $P = Q_nX_n^k + \cdots + Q_1X_n + Q_0$ où $Q_i \in K[X_1, \cdots, X_{n-1}]$. Le complémentaire des zéros de $Q_0\cdots Q_n$ est infini. Pour chacun des points $(x_1, \cdots, x_{n-1})$ de ce complémentaire, on a un nombre fini de $x_n$ tels que $(x_1, \cdots, x_n)$ annule $P$, donc une infinité qui ne l'annulent pas. On trouve ainsi une infinité de points dans $P^{-1}(\bK^\times)$\\
+Le cas $n = 1$ est clair. On procède par récurrence. Supposons le résultat vrai au rang $n-1$, et soit $P = Q_nX_n^k + \cdots + Q_1X_n + Q_0$ où $Q_i \in K[X_1, \cdots, X_{n-1}]$. Le complémentaire des zéros de $Q_0\cdots Q_n$ est infini. Pour chacun des points $(x_1, \cdots, x_{n-1})$ de ce complémentaire, on a un nombre fini de $x_n$ tels que $(x_1, \cdots, x_n)$ annule $P$, donc une infinité qui ne l'annulent pas. On trouve ainsi une infinité de points dans $P^{-1}(\bK^\times)$\\
 \end{preuve}
 
 De ça, on déduit:
 
 \begin{proposition}
-    Un ouvert non-vide de la topologie de Zariski est dense dans $\bK^n$
+Un ouvert non-vide de la topologie de Zariski est dense dans $\bK^n$
 \end{proposition}
 
 \begin{preuve}
-    On observe en premier lieu que quitte à plonger $\bK$ dans un corps infini, le résultat du lemme précédent est encore vrai. Maintenant, soit $V(E)^c$ un ouvert de $\bK^n$ et $V(E')^c$ un autre ouvert, on veut montrer $V(E)^c \cap V(E')^c \neq \varnothing$. Il suffit, pour $p_1 \in E, p_2 \in E'$ tous deux non-nuls, de montrer $V(p_1)^c \cap V(p_2)^c$ non-vide, puisque $V(p_1)^c \subset V(E)^c$ et $V(p_2)^c \subset V(E')^c$. Mais $V(p_1p_2) = V(p_1) \cup V(p_2)$, d'où $V(p_1)^c \cap V(p_2)^c = V(p_1p_2)^c$ qui est non-vide.\\
+On observe en premier lieu que quitte à plonger $\bK$ dans un corps infini, le résultat du lemme précédent est encore vrai. Maintenant, soit $V(E)^c$ un ouvert de $\bK^n$ et $V(E')^c$ un autre ouvert, on veut montrer $V(E)^c \cap V(E')^c \neq \varnothing$. Il suffit, pour $p_1 \in E, p_2 \in E'$ tous deux non-nuls, de montrer $V(p_1)^c \cap V(p_2)^c$ non-vide, puisque $V(p_1)^c \subset V(E)^c$ et $V(p_2)^c \subset V(E')^c$. Mais $V(p_1p_2) = V(p_1) \cup V(p_2)$, d'où $V(p_1)^c \cap V(p_2)^c = V(p_1p_2)^c$ qui est non-vide.\\
 \end{preuve}
 
 En combinant tout ça, on déduit:
 
 \begin{theoreme}[Cayley-Hamilton sur $\bK$]
-    Pour tout $M \in M_n(\bK)$, $\chi_M(M) = 0$.
+Pour tout $M \in M_n(\bK)$, $\chi_M(M) = 0$.
 \end{theoreme}
 
 \subsection{Théorème de Bézout faible}
 En gardant la notation $V(P) = \{x \in \bK^n \mid P(x) = 0\}$ pour $P \in \bK[X_1, \cdots, X_n]$ de la sous-section précédente, on va montrer le théorème suivant:
 \begin{theoreme}[Théorème de Bézout faible]
-    Si $P, Q \in \bK[X, Y]$ sont deux polynômes premiers entre eux, de degrés respectifs $m$ et $n$, alors $\card(V(P) \cap V(Q)) \leq mn$.
+Si $P, Q \in \bK[X, Y]$ sont deux polynômes premiers entre eux, de degrés respectifs $m$ et $n$, alors $\card(V(P) \cap V(Q)) \leq mn$.
 \end{theoreme}
 On peut en fait montrer beaucoup plus fort, sur un corps algébriquement clos et dans un contexte projectif, à savoir que cette intersection est de cardinal précisément $mn$ en comptant les multiplicités, mais ça demande nettement plus d'artillerie, trop pour ce document.
 On commence par énoncer lemme
 
 \begin{lemme}
-    Si $P, Q \in \bK[X][Y]$ sont de degrés respectifs $m$ et $n$, alors $\Res(P, Q)$ est un polynôme en $X$ de degré majoré par $mn$.
+Si $P, Q \in \bK[X][Y]$ sont de degrés respectifs $m$ et $n$, alors $\Res(P, Q)$ est un polynôme en $X$ de degré majoré par $mn$.
 \end{lemme}
 
 \begin{preuve}
-    Concisement:
-    On note $k$ et $l$ les degrés de respectivement $P$ et $Q$ en $Y$, et on écrit $$\Res(P, Q) = \sum_{\sigma \in \mathfrak{S}_{k+l}}{\varepsilon(\sigma)\alpha_{1,\sigma(1)} \cdots \alpha_{k+l, \sigma(k+l)}}$$.
-    On vérifie alors que pour $i \leq l$, si $\sigma(i) < i$ alors $\alpha_{i, \sigma(i)} = 0$ et que sinon c'est $(l + i - \sigma(i)i)$-ème de $P$ dans $\bK[X][Y]$. En faisant de même pour $i > l$, on trouve $b_{i-\sigma(i)}$ si $\sigma(i) > i$, et nul sinon.\\
-    On se ramène alors à majorer la somme $\sum_{i=1}^{l}{(m-k + \sigma(i) - i)} + \sum_{i=l+1}^{l+k}{(n-i+\sigma(i))}$. La somme des $\sigma(i) - i$ étant nulle, la somme se simplifie et on trouve la majoration voulue.\\
+Concisement:
+On note $k$ et $l$ les degrés de respectivement $P$ et $Q$ en $Y$, et on écrit $$\Res(P, Q) = \sum_{\sigma \in \mathfrak{S}_{k+l}}{\varepsilon(\sigma)\alpha_{1,\sigma(1)} \cdots \alpha_{k+l, \sigma(k+l)}}$$.
+On vérifie alors que pour $i \leq l$, si $\sigma(i) < i$ alors $\alpha_{i, \sigma(i)} = 0$ et que sinon c'est $(l + i - \sigma(i)i)$-ème de $P$ dans $\bK[X][Y]$. En faisant de même pour $i > l$, on trouve $b_{i-\sigma(i)}$ si $\sigma(i) > i$, et nul sinon.\\
+On se ramène alors à majorer la somme $\sum_{i=1}^{l}{(m-k + \sigma(i) - i)} + \sum_{i=l+1}^{l+k}{(n-i+\sigma(i))}$. La somme des $\sigma(i) - i$ étant nulle, la somme se simplifie et on trouve la majoration voulue.\\
 \end{preuve}
 
 On peut alors déduire de ça que $Z = (V(P) \cap V(Q))$ est fini:
 \begin{proposition}
-    Soit $Z = V(P) \cap V(Q)$. Si $P$ et $Q$ sont premiers entre eux, alors $Z$ est fini.
+Soit $Z = V(P) \cap V(Q)$. Si $P$ et $Q$ sont premiers entre eux, alors $Z$ est fini.
 \end{proposition}
 \begin{preuve}
-    On a $R(X) = U(X, Y)P(X, Y) + V(X, Y)Q(X, Y)$, si $(x, y) \in Z$, alors $R(x) = 0$. Comme $R$ est un polynôme en une variable, non nul, et de degré au plus $mn$, il y a au plus $mn$ valeurs de $x$ possibles. Symétriquement, on montre qu'il y a au plus $mn$ valeurs de $y$ possibles, donc au plus $m^2n^2$ valeurs dans $Z$.\\
+On a $R(X) = U(X, Y)P(X, Y) + V(X, Y)Q(X, Y)$, si $(x, y) \in Z$, alors $R(x) = 0$. Comme $R$ est un polynôme en une variable, non nul, et de degré au plus $mn$, il y a au plus $mn$ valeurs de $x$ possibles. Symétriquement, on montre qu'il y a au plus $mn$ valeurs de $y$ possibles, donc au plus $m^2n^2$ valeurs dans $Z$.\\
 \end{preuve}
 
 On déduit de ça le théorème de Bézout faible. Quitte à plonger $\bK$ dans un corps infini, il existe deux droites vectorielles $D_1, D_2$ de $\bK^2$ telle qu'aucune droite ne joignant deux points de $Z$ ne soit parallèle ni à $D_1$, ni à $D_2$. On se place alors dans le repère $(0, D_1, D_2)$.\\

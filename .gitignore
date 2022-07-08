@@ -1,0 +1,7 @@
+**/*.out
+**/*.gz
+**/*.fls
+**/*.fdb_latexmk
+**/*.aux
+**/*.log
+sources/*.txt

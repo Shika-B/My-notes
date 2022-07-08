@@ -23,7 +23,7 @@ On minimisera les prérequis. Plus précisément, on admettra seulement le résu
 \end{theoreme}
 
 \section{Prérequis analytiques}
-On notera la distance entre deux points du plan complexe $x = a+bi, y = c+di$ par $d(x, x) = |x-y| = \sqrt{(a-c)^2 + (b-d)^2}$.
+On notera la distance entre deux points du plan complexe $x = a+bi, y = c+di$ par $d(x, y) = |x-y| = \sqrt{(a-c)^2 + (b-d)^2}$.
 
 \begin{definition}
     On définit la boule ouverte centrée en un point $c \in \bC$ et de rayon $r \in \bR^+$ par
@@ -118,7 +118,7 @@ Maintenant, les résultats utiles promis sur les compacts:\\
 Soit $P = a_nX^n + \cdots + a_1X + a_0$ un polynôme non constant. On va diviser la preuve de l'existence d'une racine pour $P$ en trois étapes:
 \begin{enumerate}
     \item D'abord on va montrer que l'infimum $m = \inf_{z \in \bC}{|P(z)|}$ en module de $P$ est atteint, autrement dit qu'il existe $z0 \in \bC$ tel que $|P(z0)| = m$
-    \item Ensuite, on va montrer que si $|P(z)| > 0$, alors pour tout $r > 0$, il existe $\theta \in [0,1[$ tel que $|P(z + r e^{2i\pi\theta})| < |P(z)|$
+    \item Ensuite, on va montrer que si $|P(z)| > 0$, alors pour tout $r > 0$ suffisamment petit, il existe $\theta \in [0,1[$ tel que $|P(z + r e^{2i\pi\theta})| < |P(z)|$
     \item On conclura finalement que si $|P(z0)| > 0$, alors il existe $z$ tel que $|P(z0+z)| < |P(z0)|$, absurde.
 \end{enumerate}
 

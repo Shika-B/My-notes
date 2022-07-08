@@ -29,10 +29,11 @@ Un dernier exemple, ou plutôt une construction, est l'intersection d'une famill
 L'union de deux filtres n'est cependant pas toujours un filtre.
 Pour pouvoir considérer le filtre engendré par un ensemble de parties $\mathcal{B} \subset \mathcal{P}(X)$, il est clair qu'on a besoin d'avoir
 $$\forall B_1, \ldots, B_n \in \mathcal{B}, \bigcap_{i=1}^{n}{B_i} \neq \varnothing$$
-On dit que $\mathcal{B}$ a la propriété de l'intersection finie. Cette condition est aussi suffisante, puisque $\langle B \rangle = \{A \subset X \mid \exists B \in \mathcal{B}, B \subset A\}$ est alors un filtre, le plus petit contenant $\mathcal{B}$.
+On dit que $\mathcal{B}$ a la propriété de l'intersection finie. Cette condition est aussi suffisante, puisque, après avoir clos $\mathcal{B}$ par intersection finie pour obtenir un nouvel ensemble $\mathcal{B}_\cap$, on a $\langle \mathcal{B} \rangle = \{A \subset X \mid \exists B \in \mathcal{B}', B \subset A\}$ est alors un filtre, le plus petit contenant $\mathcal{B}$.
 
 \begin{definition}
-    Si $\mathcal{B} \subset \mathcal{P}(X)$ a la propriété de l'intersection finie, alors le filtre engendré par $B$ est donné par $$\langle B \rangle = \{A \subset X \mid \exists B \in \mathcal{B}, B \subset A\}$$
+    Si $\mathcal{B} \subset \mathcal{P}(X)$ a la propriété de l'intersection finie, alors le filtre engendré par $B$ est donné par $$\langle B \rangle = \{A \subset X \mid \exists B \in \mathcal{B}', B \subset A\}$$
+    où $\mathcal{B}_\cap$ la clôture par intersection finies de $\mathcal{B}$
 \end{definition}
 
 \begin{definition}
@@ -74,7 +75,7 @@ Pour $X$ un ensemble muni d'un (ultra)filtre $\mathcal{F}$, et $f: X \to Y$, on 
     La condition $\varnothing \not\in \mathcal{F}_f$ est claire, et $f^{-1}(Y) = X \in \mathcal{F}$ donne $Y \in \mathcal{F}_f$. Si $A, B \in \mathcal{F}_f$, alors $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$ donne $A \cap B \in \mathcal{F}_f$. L'image réciproque est croissante selon l'inclusion, donc $\mathcal{F}_f$ est clos par sur-ensemble. Finalement, si $\mathcal{F}$ est un ultrafiltre et que $f^{-1}(A) \not \in \mathcal{F}$, alors $f^{-1}(A^c) = f^{-1}(A)^c \in \mathcal{F}$ et donc $A^c \in \mathcal{F}_f$.
 \end{preuve}
 
-\section{Les filtres en topologie}
+\section{Filtres et topologie}
 Maintenant que les définitions de base sont posées, on s'intéresse à l'utilisation des (ultra)filtres en topologie, avec comme ligne de mire la preuve du fameux théorème de Tychonov, qui énonce qu'un produit (quelconque) de quasi-compact est quasi-compact pour la topologie produit.
 \begin{proposition}
     Soit $X$ un espace topologique. L'ensemble des voisinages $\mathcal{V}(x)$ d'un point $x \in X$ est un filtre

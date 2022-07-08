@@ -34,16 +34,19 @@
 
 
 % Text command for text strings I need to type in math mode
-\newcommand{\Diag}{\text{Diag}}
-\newcommand{\Vect}{\text{Vect}}
-\newcommand{\sign}{\text{sgn}}
+\newcommand{\Diag}{\textrm{Diag}}
+\newcommand{\Vect}{\textrm{Vect}}
+\newcommand{\sign}{\textrm{sgn}}
+\newcommand{\card}{\textrm{card}}
+\newcommand{\Res}{\textrm{Res}}
+\newcommand{\Disc}{\Delta}
 
-\renewcommand{\char}{\text{char}}
-\renewcommand{\Im}{\text{Im}}
-
+\renewcommand{\char}{\textrm{char}}
+\renewcommand{\Im}{\textrm{Im}}
+\renewcommand{\Re}{\textrm{Re}}
 % Colors
 \definecolor{BlueGreen}{rgb}{0.0,0.6,0.7}
-\definecolor{BlueGreen2}{rgb}{0.0,0.8,0.7}
+\definecolor{BlueGreen2}{rgb}{0.0,0.7,0.7}
 \definecolor{LightBlue}{rgb}{0.0,0.2,0.7}
 \definecolor{ocre}{RGB}{0, 113, 188}
 
@@ -69,48 +72,50 @@
   innertopmargin=0pt,
   linecolor=ocre,
   linewidth=3pt
-]{definition}{Définition}[section]
+]{definition}{Définition}[subsection]
 
 \theoremstyle{plain}
 \newmdtheoremenv[
   hidealllines=true,
   leftline=true,
+  linecolor=BlueGreen,
   innerleftmargin=10pt,
   innerrightmargin=10pt,
   innertopmargin=0pt,
-  linecolor=BlueGreen,
   linewidth=3pt
-]{proposition}{Proposition}[section]
+]{proposition}{\color{BlueGreen}Proposition}[subsection]
 
 \theoremstyle{plain}
 \newmdtheoremenv[
   hidealllines=true,
   leftline=true,
+  linecolor=BlueGreen2,
   innerleftmargin=10pt,
   innerrightmargin=10pt,
   innertopmargin=0pt,
-  linecolor=BlueGreen,
   linewidth=3pt
-]{lemme}{Lemme}[section]
+]{lemme}[proposition]{\color{BlueGreen}Lemme}
 
 \theoremstyle{plain}
 \newmdtheoremenv[
+hidealllines=true,
+leftline=true,
 linecolor=ocre,
 roundcorner=2pt,
 linewidth=3pt,
 innertopmargin=0pt,
-]{theoreme}{Théorème}[section]
+]{theoreme}[proposition]{\color{ocre}Théorème}
 
 \theoremstyle{plain}
 \newmdtheoremenv[
   hidealllines=true,
   leftline=true,
+  linecolor=BlueGreen2,
   innerleftmargin=10pt,
   innerrightmargin=10pt,
   innertopmargin=0pt,
-  linecolor=BlueGreen2,
   linewidth=3pt
-]{corollaire}{Corollaire}[section]
+]{corollaire}[proposition]{\color{BlueGreen2}Corollaire}
 
 \theoremstyle{plain}
 \newmdtheoremenv[
@@ -121,7 +126,7 @@ innertopmargin=0pt,
   innertopmargin=0pt,
   linecolor=LightBlue,
   linewidth=3pt
-]{exercice}{Exercice}[section]
+]{exercice}{Exercice}[subsection]
 
 \newenvironment{preuve}{\textcolor{ocre}{\textit{Preuve.}}}{}
 
@@ -154,11 +159,11 @@ innertopmargin=0pt,
 \renewcommand{\contentsname}{Table des matières}
 
 % Changes chapter formatting in the table of contents
-\newcommand{\cftchapfont}{\LARGE\bfseries\hypersetup{linkcolor=ocre}}
-\newcommand{\cftchappagefont}{\LARGE\bfseries\color{ocre}}
-\newcommand{\cftchapleader}{\LARGE\bfseries\color{ocre}\cftdotfill{\cftsecdotsep}}
-\newcommand{\cftchapdotsep}{6}
-\newcommand{\cftchapafterpnum}{\vskip15pt}
+%\newcommand{\cftchapfont}{\LARGE\bfseries\hypersetup{linkcolor=ocre}}
+%\newcommand{\cftchappagefont}{\LARGE\bfseries\color{ocre}}
+%\newcommand{\cftchapleader}{\LARGE\bfseries\color{ocre}\cftdotfill{\cftsecdotsep}}
+%\newcommand{\cftchapdotsep}{6}
+%\newcommand{\cftchapafterpnum}{\vskip15pt}
 
 % Changes section formatting in the table of contents
 \renewcommand{\cftsecfont}{\Large\bfseries}
@@ -185,7 +190,7 @@ innertopmargin=0pt,
 \chapterfont{\color{ocre}}
 
 % Changes chapter's title format
-\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\fontsize{24}{10}\bfseries\color{ocre}}
+%\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\fontsize{24}{10}\bfseries\color{ocre}}
 
 % Avoids page breaks after chapter
 \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
