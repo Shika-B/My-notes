@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage{prelude_english}
+
+\title{Cardinals for the working mathematician}
+\author{Zighem Abdelrahman}
+\date{August 2024}
+
+\begin{document}
+
+\maketitle
+
+I have a few maths friends, already well-versed in mathematics, that do not know much about set theory. In particular, they blackbox the very little amount of (non-foundational) set theory they should, and actually, care about in their daily life as mathematicians. This set theory may be described as "Theorems that depend on the axiom of choice but are not immediate corollaries of Zorn's lemma" and my experience is that in practice, those questions are questions related to cardinals.\\
+
+This note is an answer to that situation. I try to keep everything as minimal and efficient as it is possible without obscuring the ideas. Some standard definitions about ordered sets are not recalled but may be found in any standard references. This text is heavily based on the exposition given in these \href{https://people.math.wisc.edu/~awmille1/old/m771-10/kunen770.pdf}{notes} by Kenneth Kunen. 
+
+\tableofcontents
+\newpage
+
+\section{Preliminaries}
+
+We begin by recalling that
+\begin{definition}
+    A set $E$ is strictly ordered by a binary relation $R \subset E \times E$ if it satisfies:
+    \begin{itemize}
+        \item Irreflexivity: $\forall x \in E, \lnot (xRx)$
+        \item Transitivity: $\forall x, y, z \in E, (x R y \land y R z) \implies (x R z)$
+    \end{itemize}
+    We say that $E$ is strictly ordered by $R$ and that $(E, R)$ is a strictly ordered set.
+\end{definition}
+Notice that it implies $\forall x, y \in E, x R y \implies \lnot (y R x)$, which is a fact we will use quite a few times. We will interchangeably use ordered and strictly ordered sets. Indeed, we may pass from one to the other by either adding or removing the relations $xRx$. We also define:
+\begin{definition}
+A (strictly) ordered set $(E, \leq)$ is (strictly) well-ordered if any nonempty subset $A \subset E$ has a minimum.
+\end{definition}
+
+Another fact we will implicitly use a few times is
+\begin{proposition}
+    A well-ordered set $(E, \leq)$ is totally ordered.
+\end{proposition}
+
+\begin{proof}
+    Let $x, y \in E$. The set $\{x, y\}$ has a minimum, which must be comparable to both elements.
+\end{proof}
+
+\section{Ordinal numbers}
+Von Neumann ordinals are defined to be "concrete" representation of well-ordered sets. It will be a theorem that any well-ordered set is isomorphic to exactly one Von Neumann ordinal (where the morphisms are the strictly increasing maps). 
+\begin{definition}
+A set $\alpha$ is said to be transitive if it satisfies $\forall \beta \in \alpha, \beta \subset \alpha$. Moreover, $\alpha$ is said to be a Von Neumann ordinal if it is strictly well-ordered by the relation $\in$. We denote by $\mathcal{O}$ the class\footnote{Collection of sets that may be too large to be a set. We will not delve into these subtleties as they do not matter to us. See also \href{https://en.wikipedia.org/wiki/Russell\%27s_paradox}{Russell's paradox}} of all ordinals.
+\end{definition}
+
+The definition may seem convoluted but it turns out this is actually an easy to work with class of representatives modulo isomorphism of well-ordered sets. The empty set $\varnothing$ is an ordinal. We will show that $S(\alpha) = \alpha \cup \{\alpha\}$ is an ordinal whenever $\alpha$ is, and we may build the natural numbers using that: We set $0$ to be $\varnothing$ and $n+1$ is $S(n)$. The set of all natural numbers is also an ordinal, the smallest (in a sense to be defined) infinite one. In the context of ordinal theory, we denote it by $\omega$ instead of $\mathbb{N}$.
+
+The roadmap is as follows:
+\begin{itemize}
+    \item The class $\mathcal{O}$ behaves like an ordinal, in the sense that it is well-ordered by $\in$ and transitive.
+    \item Any well-ordered set is order-isomorphic to exactly one ordinal.
+    \item How does transfinite induction on ordinals work ?
+    \item Any set can be well-ordered.
+    \item The relation $A \prec B$ iff there exists an injection $A \hookrightarrow B$ is a total order.
+    \item The equivalences $\mathrm{AC} \iff \mathrm{Zorn} \iff \mathrm{Zermelo}$ in $\mathrm{ZF}$.
+\end{itemize}
+
+Actually, we won't discuss the third point in details, but all the core ideas will appear in the proof of the second statement. See Kunen's text for a more thorough development of that part of the theory. One must also know that there is two entirely distinc notions of ordinal arithmetic and cardinal arithmetic, that are completely incompatible, even though cardinals will turn out to be defined as a particular kind of ordinals. This notion of ordinal arithmetic can be safely ignored as it is of no use and completely absent in non set-theory related mathematics.
+
+\subsection{The structure of the class $\mathcal{O}$}
+
+\begin{lemma}
+For any ordinals $\alpha, \beta$
+\begin{enumerate}
+    \item The set $S(\alpha) = \alpha \cup \{\alpha\}$ is an ordinal, called the successor of $\alpha$.
+    \item The sets $\alpha \cap \beta, \alpha \cup \beta$ are ordinals.
+    \item If $z \in \alpha$, then $z$ is an ordinal.
+    \item We have the equivalence $\alpha \subset \beta \iff \left(\alpha = \beta \lor \alpha \in \beta\right )$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We only prove 3. and 4.
+
+Let $\alpha$ be an ordinal and $z \in \alpha$. It is clear that $z$ is still well-ordered by $\in$, and we only need to check it is transitive, that is $x \in y \in z \implies x \in z$. It is enough to show that $x, y \in \alpha$, because the statement $x \leq y \leq z \implies x \leq z$ is definitionnally part of being ordered by $\in$. 
+As $\alpha$ is transitive, we have $y \in z \subset \alpha$, that is $y \in \alpha$. It follows that $y \subset \alpha$ and $x \in \alpha$. As $\alpha$ is ordered by $\in$ and $x \in y \in z$, we must have $x \in z$.\\
+
+The reverse implication part of 4. is transitivity. Assuming $\alpha \subset \beta$ and $\alpha \neq \beta$ gives that $X = \beta \setminus \alpha$ is nonempty, so let $\gamma$ be its minimum. Showing $\gamma = \alpha$ is enough as $\gamma \in \beta$. For any $z \in \gamma$ we have $z \in \beta$ as $\beta$ is transitive and $z \not\in X$ as $\gamma$ is a minimum, so $\gamma \subset \alpha$.
+
+If $\gamma \subsetneq \alpha$, let once again $\mu$ be the minimum of $Y = \alpha \setminus \gamma$, assuming $Y$ is nonempty. As $\mu \not\in \gamma$, $\gamma = \mu$ or $\gamma \in \mu$. The first is contradictory as $\mu = \gamma \in X$ but $\mu \in \alpha$, while the second is because $\gamma \in \mu \in \alpha$ gives $\gamma \in \alpha$. It must mean $Y$ was empty and we are done.
+\end{proof}
+
+\begin{theorem}[Structure theorem for $\mathcal{O}$]
+    The class $\mathcal{O}$ behaves like an ordinal, in the sense that it is well-ordered by $\in$ and transitive. 
+\end{theorem}
+\begin{proof}
+    Let $\alpha, \beta$ be ordinals
+    \begin{itemize}
+        \item Irreflexivity: $\alpha \in \alpha$ contradicts the \href{https://en.wikipedia.org/wiki/Axiom_of_regularity#No_set_is_an_element_of_itself}{axiom of foundation}\footnote{We may avoid it in the case of ordinals as it is actually part of the definition: as $\in$ strictly order $\alpha$, it is irreflexive, and $\alpha \in \alpha$ would imply $\alpha \not\in \alpha$.}
+        \item Transitivity: If $\alpha \in \beta, \beta \in \gamma$, then by the 3th lemma $\beta \subset \gamma$ and $\alpha \in \gamma$.
+        \item Well-order: Let $X$ be any nonempty \textit{class} (in particular, set) of ordinals and set $\alpha \in X$. If $\alpha$ is a minimum, we are done. Otherwise, the class $\alpha \cap X = \{\beta \in \alpha \mid \beta \in X\}$ is a nonempty set (as it is a subset of $\alpha$), and its minimum is a minimum of $X$.
+    \end{itemize}
+\end{proof}
+The main takeaway is that any set of ordinals is well-ordered. 
+
+
+\subsection{Ordinals and well-ordered sets}
+
+We now describe some of the categorical structure of $\mathcal{O}$. In less pedantic word, what are the increasing maps between ordinals? The answer turns out to be very simple for isomorphisms
+\begin{proposition}
+    For any ordinals $\alpha, \beta$, let $f: \alpha \to \beta$ be a strictly increasing bijection, i.e an isomorphism. We must have $\alpha = \beta$ and $f = \mathrm{id}_\alpha$.
+\end{proposition}
+\begin{proof}
+    For any $\gamma \in \alpha$, we have the equality $f([\varnothing; \gamma[) = [\varnothing; f(\gamma)[$. The transitivity of $\alpha$ gives $f([\varnothing; \gamma[) = \{f(x) \mid \mu \in \gamma \land \mu \in \alpha\} = \{f(\mu) \mid \mu \in \gamma\}$. On the other hand, as $\beta$ is transitive, $[\varnothing; f(\gamma)[ = f(\gamma)$. To sum up, we have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\}$. Now assume $f$ is not the identity and let $\gamma$ be the least element not satisfying $f(\gamma) = \gamma$. We would have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\} = \{\mu \mid \mu \in \gamma\} = \gamma$, absurd.
+\end{proof}
+
+
+\begin{theorem}
+    Any well-ordered set $(E, \leq)$ is isomorphic to an ordinal.
+\end{theorem}
+
+\begin{proof}
+    The idea is to do some kind of induction, i.e to show there is no smallest element that can satisfy the negation of the theorem.\\
+    
+    Assume for the time being that for any $y \in E$, we have isomorphisms $f_y: [0, y] \to \alpha_y$ where $\alpha_y$ is an ordinal depending on $y$. We may actually check those maps must be compatible, in the sense that the images agree whenever they are simultaneously defined:\\
+    Indeed, if $x, y \in E$ and say $x \leq y$, then $\beta := f_y([0;x])$ is an ordinal isomorphic to $[0;x]$ through $f_{y, |[0;x]}$. It follows that $f_{y, |[0, x]} \circ f_x^{-1}: \alpha_x \to \beta$ is an isomorphism of ordinals, so we must have $\alpha_x = \beta$ and the maps coincide on $[0;x]$.\\
+    
+    Now, define a map $$g: E \to \bigcup_{x \in E}{\alpha_x}, y \to f_y(y)$$ we can check $g$ is an isomorphism: we already showed that $\alpha_x \in \alpha_y$ whenever $x < y$, which gives both injectivity and that $g$ is strictly increasing. Moreover, we know that for any $y \in E$, $g([0,y]) = \{f_x(x) \mid x \leq y \} = \{f_y(x) \mid x \leq y\} = \alpha_y$ by the compatibility property, giving surjectivity.
+    
+    Let $y$ be the smallest element such that $[0; y]$ is not isomorphic to some ordinal. By setting $E = [0; y[$ in the above construction, we have a contradiction.
+\end{proof}
+
+The proposition ensures uniqueness and the theorem existence, so we may define unambiguously
+\begin{definition}
+    The order type of a well-ordered set $(E, \leq)$ is the unique ordinal is it isomorphic to it. We denote it by $\mathrm{type}(E, \leq)$ or $\mathrm{type}(E)$ when there's no ambiguity.
+\end{definition}
+
+\section{Cardinals}
+
+
+\subsection{Using the axiom of choice}
+Our next goal is now to enable all of the usages of the theory of well-ordered sets for regular sets. This is the following result:
+\begin{theorem}[Zermelo, ZFC]
+    Any set can be well-ordered
+\end{theorem}
+
+We won't discuss the proof in this section and only explore its consequences. First, we have
+\begin{corollary}
+    For any two sets $E, F$, there is either an injection from $E$ to $F$ or an injection from $F$ to $E$.
+\end{corollary}
+\begin{proof}
+    Indeed, let $\leq_E, \leq_F$ be well-orders on $E$ and $F$ respectively. We must have either $\mathrm{type}(E, \leq_E) \subset \mathrm{type}(F, \leq_F)$ or $\mathrm{type}(F, \leq_F) \subset \mathrm{type}(E, \leq_E)$ as ordinals are totally ordered by inclusion. Assume the first wlog, then have a composition of maps
+    $$(E, \leq_E) \simeq \mathrm{type}(E, \leq_E) \subset \mathrm{type}(F, \leq_F) \simeq (F, \leq_F) $$
+    where $\simeq$ denote the canonical bijections.
+\end{proof}
+
+Motivated by this, we define for any two sets $A, B$ the relation $A \prec B$ to mean that there exists an injection $A \hookrightarrow B$. It is natural to ask if $\prec$ is an ordering on the class $\mathbf{Set}$ of all sets ? If it were, the corollary would give us that it is even a total order. Obviously $A \prec A$ and if we have both $A \prec B$ and $B \prec C$ then we have $A \prec C$ through composition. But $A \prec B \land B \prec A$ does not imply $A = B$: take for instance $A = \{\varnothing\}, B = \{A\}$. Luckily, the next best thing is true
+
+\begin{theorem}[Cantor-Bernstein, ZF]
+    Let $A, B$ be sets and $f: A \hookrightarrow B, g: B \hookrightarrow A$ be injections. Then $A$ and $B$ are in bijection.
+\end{theorem}
+
+One must know\footnote{Nerds are everywhere...} that this theorem holds without assuming the axiom of choice, but the proofs without are tedious and not particularly enlightening. I therefore chose to prove it using the theory we already developed (well, we have yet to prove Zermelo theorem..). We still need to do a little work:
+\begin{definition}
+    An ordinal is a cardinal if it does not inject in any strictly smaller ordinal.
+\end{definition}
+
+A cardinal is the smallest ordinal representative of its class, modulo the equivalence relation on $\mathbf{Set}$ given by $A \sim B \iff A\text{ and } B \text{ are in bijection}$. 
+Standard examples are given by finite ordinals or $\omega$, as its elements are exactly finite ordinals. A simple non-example is $S(\omega)$. It is an easy exercice to check $S(\omega) \sim \omega$. A more complex example is the cardinality of $\mathbb{R}$. It may be shown, using Cantor-Bernstein for instance, that $\mathbb{R} \sim \mathcal{P}(\mathbb{N})$, i.e that their cardinals are equal. For a long-time, mathematicians wondered whether there was a cardinal between $\omega$ and $|\mathbb{R}|$, and the question was called the Continuum Hypothesis (CH). It is now known that there is no satisfying answer to that question\footnote{More precisely, CH is independent from ZF(C). Concretely it means that ZF(C) is unable to prove CH nor its negation.}. Our needs are simpler, we only want
+\begin{theorem}[ZFC]
+    Any set $E$ is in bijection with exactly one cardinal, called the cardinal of $E$ and denoted $|E|$
+\end{theorem}
+
+\begin{proof}
+    By Zermelo the set\footnote{Actually, it is not entirely obvious it is a set. But even if it was a proper class, it would not matter for our use.} of ordinals in bijection with $E$ is non-empty, so let $\kappa$ be its minimum. Then minimality ensures that any $\mu \in \kappa$ is not in bijection with $E$, and thus not in bijection with $\kappa$, that is $\kappa$ is a cardinal. Uniqueness is obvious.
+\end{proof}
+
+We may now prove the Cantor-Bernstein theorem: \begin{proof}
+    For any well-ordering $(A, \leq_A)$, we have an injection $|A| \sim A \hookrightarrow B \sim |B|$. In particular, $|A|$ injects in $|B|$ and thus $|A| \subset |B|$. Symmetrically we get $|B| \subset |A|$, and since cardinals are ordered by inclusion (as ordinals are), we get $|A| = |B|$, which is equivalent to $A \sim B$.
+\end{proof}
+
+\subsection{Discussing the axiom of choice}
+This is a good spot to stop reading. We defined cardinals and discussed elementary facts about them. But we still ignored the proof of Zermelo's theorem. To discuss it, we must discuss the axiom of choice. It has a lot of equivalent forms and the purpose of this subsection is to describe its most common forms and the equivalences.
+
+\begin{axiom}[Axiom\footnote{See \href{https://math.stackexchange.com/a/2515892/864752}{here} for a short explanation on why it is an axiom and not a theorem} of choice]
+    For any set $X$, we can find a map $f: \mathcal{P}(X)\setminus\{\varnothing\} \to X$ such that for any $Y \subset X$ we have $f(Y) \in Y$
+\end{axiom}
+The map $f$ is a way to \textit{choose} an element in each of the subsets $Y \subset X$.
+We now state Zorn lemma. Recall that
+
+\begin{definition}
+Let $(E, \leq)$ be an ordered set:
+\begin{itemize}
+    \item A subset $A \subset E$ is called a chain if it is totally ordered.
+    \item An upper bound of a subset $A$ is an element $x \in E$ such that $a \leq x$ for any $a \in A$.
+    \item An element $m \in E$ is said to be maximal\footnote{Which is not the same thing as being a maximum !} if for any $x \in E$ such that $m \leq x$, we have $x = m$.
+\end{itemize}  
+\end{definition}
+
+\begin{theorem}[Zorn's lemma]
+    Let $(E, \leq)$ be an ordered set such that any chain has an upper bound. Then $E$ has a maximal element.
+\end{theorem}
+
+We will prove that AC, Zorn and Zermelo are equivalent. Some implications are easy, some are notably harder. Let us start with the easiest ones \\
+
+$\mathrm{Zermelo} \implies \mathrm{AC}$: Let $X$ be a set. Pick a well-order $\leq_X$, and define $f: Y \mapsto \min Y$, which is a well-defined choice function.\\
+
+$\mathrm{Zorn} \implies \mathrm{Zermelo}$: Let $X$ be a set and let $M$ be the set of all tuples $(Y, \leq)$ where $Y \subset X$ and $\leq$ is a well-ordering of $Y$. We define an order relation on $M$ as $(Y, \leq_Y) \prec (Z, \leq_Z) \iff Y \subset Z \land \leq_Y \text{ extends } \leq_Z$. If $C$ is a chain of $(M, \prec)$, then an upper-bound is given by the union (in the appropriate and obvious sense) of the elements in $C$. Zorn lemma applies, and let $(Y, \leq_Y)$ be a maximal element of $M$. We must have $Y = X$, as otherwise by picking $z \in X \setminus Y$ and extending $\leq_Y$ so that $y \leq_Y z$ for any $y \in Y$ contradicts maximality, and $\leq_Y$ is a well-ordering of $X$.\\
+
+$\mathrm{AC} \implies \mathrm{Zorn}$: This is by far the hardest implication. We will need the ordinal theory we already built and a little more. Let $(X, \leq)$ be an ordered set satisfying the assumptions of Zorn lemma, and let $f: \mathcal{P}(X)\setminus\{\varnothing\} \to X$ be a choice map. We argue by contradiction and assume $X$ has no maximal element. In particular, any chain $C \subset X$ has a strict upper-bound. For any chain, let $M(C)$ denote the set of all strict upper bounds of $C$.\\
+
+We begin by assuming we have some ordinal $\gamma$ that can't be injected in $X$\footnote{Assuming Zermelo's theorem, the smallest cardinal that's strictly greater than $|X|$ works, as for any cardinal, there is always a larger cardinal, see for instance \href{https://en.wikipedia.org/wiki/Cantor\%27s_theorem}{Cantor's theorem}}. Let $g: \gamma \to X$ be the uniquely defined map\footnote{This is the good old definition by induction. But, I'll admit it, I am sweeping the dust under the carpet here. It is not as obvious as I make it seem like that $g$ actually exists. The details are kinda annoying and obscure the idea, so just trust me bro. Or read Kunen's text, the details are page 45.} such that $g(\alpha) = f(M(\{g(\beta) \in \alpha\}))$. As $M(C)$ is never empty, this map is well-defined and is strictly increasing. In particular, it is an injection, which contradicts the hypothesis as desired.\\
+
+Now, we need to show $\gamma$ exists without assuming Zermelo. Actually, this part does not depend on the axiom of choice at all. There are two roads:
+\begin{itemize}
+    \item Either we let $\gamma$ be the whole class $\mathcal{O}$. We just defined an injective map from $\mathcal{O}$ to $X$. But $\mathcal{O}$ cannot be a set, as otherwise by the structure theorem it would be itself an ordinal, and $\mathcal{O} \in \mathcal{O}$ is absurd for one of the two reasons already discussed. An injective map from a proper class to a set contradicts the \href{https://en.wikipedia.org/wiki/Axiom_schema_of_replacement}{replacement scheme}. This is the standard proof.
+    \item  The other option is to pick $\gamma$ as given by Hartog's theorem below. That is, if the idea of working with something that may not be a set to do set theory bothers you. 
+\end{itemize}
+
+\begin{theorem}[Hartog, ZF]
+    For any set $X$, there is a cardinal $\kappa$ that does not inject in $X$.
+\end{theorem}
+
+\begin{proof}
+    TODO. See Kunen's notes on p.53 for the time being.
+\end{proof}
+\end{document}

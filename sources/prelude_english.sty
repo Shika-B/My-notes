@@ -1,0 +1,208 @@
+\ProvidesPackage{prelude}
+
+% Packages to import
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage[titles]{tocloft}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{etoolbox}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usepackage{titlesec}
+\usepackage{mathtools}
+
+% Margins
+\geometry{hmargin=1.5cm,vmargin=1.5cm}
+
+% subsubsections
+
+\setcounter{secnumdepth}{4}
+
+% Formatted letters
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bGL}{\mathbb{GL}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cO}{\mathcal{O}}
+
+
+% Text command for text strings I need to type in math mode
+\newcommand{\Diag}{\text{Diag}}
+\newcommand{\Vect}{\text{Vect}}
+\newcommand{\sign}{\text{sgn}}
+
+\renewcommand{\char}{\text{char}}
+\renewcommand{\Im}{\textrm{Im}}
+\renewcommand{\Re}{\textrm{Re}}
+% Colors
+\definecolor{BlueGreen}{rgb}{0.0,0.6,0.7}
+\definecolor{BlueGreen2}{rgb}{0.0,0.7,0.7}
+\definecolor{LightBlue}{rgb}{0.0,0.2,0.7}
+\definecolor{ocre}{RGB}{0, 113, 188}
+\definecolor{Cyan}{RGB}{0,185,255}
+% Generic n x n matrix
+
+\newcommand{\MatNxN}[1][\lambda]{\begin{pmatrix}
+    #1_{1, 1} &\cdots &#1_{1,n} \\
+    \vdots    &\ddots &\vdots \\
+    #1_{n, 1} &\cdots &#1_{n, n}
+\end{pmatrix}
+}
+
+% Defines counters for results (proposition, corollary and theorems) and definitions
+
+
+% Defines theorem, definition, proof.. environments
+\theoremstyle{definition}
+\newmdtheoremenv[
+  hidealllines=true,
+  leftline=true,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linecolor=cyan,
+  linewidth=3pt
+]{definition}{\color{Cyan}Definition}[subsection]
+
+\theoremstyle{definition}
+\newmdtheoremenv[
+  hidealllines=true,
+  leftline=true,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linecolor=cyan,
+  linewidth=3pt
+]{axiom}{\color{Cyan}Axiom}[subsection]
+
+\theoremstyle{plain}
+\newmdtheoremenv[
+  hidealllines=true,
+  leftline=true,
+  linecolor=BlueGreen,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linewidth=3pt
+]{proposition}{\color{BlueGreen}Proposition}[subsection]
+
+\theoremstyle{plain}
+\newmdtheoremenv[
+  hidealllines=true,
+  leftline=true,
+  linecolor=BlueGreen2,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linewidth=3pt
+]{lemma}[proposition]{\color{BlueGreen}Lemma}
+
+\theoremstyle{plain}
+\newmdtheoremenv[
+hidealllines=true,
+leftline=true,
+linecolor=ocre,
+roundcorner=2pt,
+linewidth=3pt,
+innertopmargin=0pt,
+]{theorem}[proposition]{\color{ocre}Theorem}
+
+\theoremstyle{plain}
+\newmdtheoremenv[
+  hidealllines=true,
+  leftline=true,
+  linecolor=BlueGreen2,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linewidth=3pt
+]{corollary}[proposition]{\color{BlueGreen2}Corollary}
+
+\theoremstyle{plain}
+\newmdtheoremenv[
+  %% hidealllines=true,
+  leftline=true,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=0pt,
+  linecolor=LightBlue,
+  linewidth=3pt
+]{remarque}{Remarque}[subsection]
+
+\newenvironment{preuve}{\textcolor{ocre}{\textit{Preuve.}}}{}
+
+% Removes the 
+\renewcommand{\qedsymbol}{}
+
+% Makes every math displayed in display style 
+\everymath{\displaystyle}
+
+% Changes default font
+% \renewcommand\familydefault{\sfdefault}
+
+% Avoids alineas at the beginning of a new paragraph 
+\setlength{\parindent}{0cm}
+
+
+
+% Formates the links in the table of contents 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=cyan
+}
+
+%%%%%%%%%%%% Table of contents %%%%%%%%%%%%
+
+% Change TOC name
+\renewcommand{\contentsname}{Contents}
+
+% Changes chapter formatting in the table of contents
+%\newcommand{\cftchapfont}{\LARGE\bfseries\hypersetup{linkcolor=ocre}}
+%\newcommand{\cftchappagefont}{\LARGE\bfseries\color{ocre}}
+%\newcommand{\cftchapleader}{\LARGE\bfseries\color{ocre}\cftdotfill{\cftsecdotsep}}
+%\newcommand{\cftchapdotsep}{6}
+%\newcommand{\cftchapafterpnum}{\vskip15pt}
+
+% Changes section formatting in the table of contents
+\renewcommand{\cftsecfont}{\Large\bfseries}
+\renewcommand{\cftsecpagefont}{\Large\bfseries}
+\renewcommand{\cftsecleader}{\hfill}
+\renewcommand{\cftsecafterpnum}{\vskip10pt}
+
+% Changes subsection formatting in the table of contents
+\renewcommand{\cftsubsecafterpnum}{\vskip10pt}
+\renewcommand{\cftsubsecfont}{\large}
+\renewcommand{\cftsubsecpagefont}{\large}
+
+% Changes subsection formatting in the table of contents
+\renewcommand{\cftsubsubsecafterpnum}{\vskip10pt}
+\renewcommand{\cftsubsubsecfont}{\medium}
+\renewcommand{\cftsubsubsecpagefont}{\medium}
+
+% Avoids indentations in the TOC
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{5pt}
+
+%%%%%%%%%%%% Chapter, section.. formating %%%%%%%%%%%%
+\chapterfont{\color{ocre}}
+
+% Changes chapter's title format
+%\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\fontsize{24}{10}\bfseries\color{ocre}}
+
+% Avoids page breaks after chapter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
