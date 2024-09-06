@@ -105,7 +105,7 @@ We now describe some of the categorical structure of $\mathcal{O}$. In less peda
     For any ordinals $\alpha, \beta$, let $f: \alpha \to \beta$ be a strictly increasing bijection, i.e an isomorphism. We must have $\alpha = \beta$ and $f = \mathrm{id}_\alpha$.
 \end{proposition}
 \begin{proof}
-    For any $\gamma \in \alpha$, we have the equality $f([\varnothing; \gamma[) = [\varnothing; f(\gamma)[$. The transitivity of $\alpha$ gives $f([\varnothing; \gamma[) = \{f(x) \mid \mu \in \gamma \land \mu \in \alpha\} = \{f(\mu) \mid \mu \in \gamma\}$. On the other hand, as $\beta$ is transitive, $[\varnothing; f(\gamma)[ = f(\gamma)$. To sum up, we have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\}$. Now assume $f$ is not the identity and let $\gamma$ be the least element not satisfying $f(\gamma) = \gamma$. We would have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\} = \{\mu \mid \mu \in \gamma\} = \gamma$, absurd.
+    For any $\gamma \in \alpha$, we have the equality $f([\varnothing; \gamma[) = [\varnothing; f(\gamma)[$. The transitivity of $\alpha$ gives $f([\varnothing; \gamma[) = \{f(\mu) \mid \mu \in \gamma \land \mu \in \alpha\} = \{f(\mu) \mid \mu \in \gamma\}$. On the other hand, as $\beta$ is transitive, $[\varnothing; f(\gamma)[ = f(\gamma)$. To sum up, we have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\}$. Now assume $f$ is not the identity and let $\gamma$ be the least element satisfying $f(\gamma) \neq \gamma$. We would have $f(\gamma) = \{f(\mu) \mid \mu \in \gamma\} = \{\mu \mid \mu \in \gamma\} = \gamma$, absurd.
 \end{proof}
 
 
@@ -116,7 +116,7 @@ We now describe some of the categorical structure of $\mathcal{O}$. In less peda
 \begin{proof}
     The idea is to do some kind of induction, i.e to show there is no smallest element that can satisfy the negation of the theorem.\\
     
-    Assume for the time being that for any $y \in E$, we have isomorphisms $f_y: [0, y] \to \alpha_y$ where $\alpha_y$ is an ordinal depending on $y$. We may actually check those maps must be compatible, in the sense that the images agree whenever they are simultaneously defined:\\
+    Let $[0,y] = \{ x \in E / x \leq y \}$. Assume for the time being that for any $y \in E$, we have isomorphisms $f_y: [0, y] \to \alpha_y$ where $\alpha_y$ is an ordinal depending on $y$. We may actually check those maps must be compatible, in the sense that the images agree whenever they are simultaneously defined:\\
     Indeed, if $x, y \in E$ and say $x \leq y$, then $\beta := f_y([0;x])$ is an ordinal isomorphic to $[0;x]$ through $f_{y, |[0;x]}$. It follows that $f_{y, |[0, x]} \circ f_x^{-1}: \alpha_x \to \beta$ is an isomorphism of ordinals, so we must have $\alpha_x = \beta$ and the maps coincide on $[0;x]$.\\
     
     Now, define a map $$g: E \to \bigcup_{x \in E}{\alpha_x}, y \to f_y(y)$$ we can check $g$ is an isomorphism: we already showed that $\alpha_x \in \alpha_y$ whenever $x < y$, which gives both injectivity and that $g$ is strictly increasing. Moreover, we know that for any $y \in E$, $g([0,y]) = \{f_x(x) \mid x \leq y \} = \{f_y(x) \mid x \leq y\} = \alpha_y$ by the compatibility property, giving surjectivity.
@@ -159,8 +159,7 @@ One must know\footnote{Nerds are everywhere...} that this theorem holds without 
     An ordinal is a cardinal if it does not inject in any strictly smaller ordinal.
 \end{definition}
 
-A cardinal is the smallest ordinal representative of its class, modulo the equivalence relation on $\mathbf{Set}$ given by $A \sim B \iff A\text{ and } B \text{ are in bijection}$. 
-Standard examples are given by finite ordinals or $\omega$, as its elements are exactly finite ordinals. A simple non-example is $S(\omega)$. It is an easy exercice to check $S(\omega) \sim \omega$. A more complex example is the cardinality of $\mathbb{R}$. It may be shown, using Cantor-Bernstein for instance, that $\mathbb{R} \sim \mathcal{P}(\mathbb{N})$, i.e that their cardinals are equal. For a long-time, mathematicians wondered whether there was a cardinal between $\omega$ and $|\mathbb{R}|$, and the question was called the Continuum Hypothesis (CH). It is now known that there is no satisfying answer to that question\footnote{More precisely, CH is independent from ZF(C). Concretely it means that ZF(C) is unable to prove CH nor its negation.}. Our needs are simpler, we only want
+A cardinal is the smallest ordinal representative of its class, modulo the equivalence relation on $\mathbf{Set}$ given by $A \sim B \iff A\text{ and } B \text{ are in bijection}$. Note that this definition coincides with that of the cardinal of a finite set. Standard examples are given by finite ordinals or $\omega$, as its elements are exactly finite ordinals. A simple non-example is $S(\omega)$. It is an easy exercice to check $S(\omega) \sim \omega$. A more complex example is the cardinality of $\mathbb{R}$. It may be shown, using Cantor-Bernstein for instance, that $\mathbb{R} \sim \mathcal{P}(\mathbb{N})$, i.e that their cardinals are equal. For a long-time, mathematicians wondered whether there was a cardinal between $\omega$ and $|\mathbb{R}|$, and the question was called the Continuum Hypothesis (CH). It is now known that there is no satisfying answer to that question\footnote{More precisely, CH is independent from ZF(C). Concretely it means that ZF(C) is unable to prove CH nor its negation.}. Our needs are simpler, we only want
 \begin{theorem}[ZFC]
     Any set $E$ is in bijection with exactly one cardinal, called the cardinal of $E$ and denoted $|E|$
 \end{theorem}
@@ -170,7 +169,7 @@ Standard examples are given by finite ordinals or $\omega$, as its elements are 
 \end{proof}
 
 We may now prove the Cantor-Bernstein theorem: \begin{proof}
-    For any well-ordering $(A, \leq_A)$, we have an injection $|A| \sim A \hookrightarrow B \sim |B|$. In particular, $|A|$ injects in $|B|$ and thus $|A| \subset |B|$. Symmetrically we get $|B| \subset |A|$, and since cardinals are ordered by inclusion (as ordinals are), we get $|A| = |B|$, which is equivalent to $A \sim B$.
+    For any well-ordering $(A, \leq_A)$, we have an injection $|A| \sim A \hookrightarrow B \sim |B|$. In particular, $|A|$ injects in $|B|$ and thus $|A| \subset |B|$. Symmetrically we get $|B| \subset |A|$, and since cardinals are ordered by inclusion (as ordinals are), we get $|A| = |B|$, which is equivalent to $A \sim B$. Note the absolute non-constructiveness of this proof : we fully abstract both injections, and do not get an explicit bijection. 
 \end{proof}
 
 \subsection{Discussing the axiom of choice}
